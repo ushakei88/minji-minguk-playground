@@ -31,9 +31,9 @@
   .pills{display:flex;gap:1vw;align-items:center;font-size:clamp(14px,1.6vw,26px);flex-wrap:wrap;justify-content:center}
   .pill{font-size:inherit;padding:.6vh 1.4vw;border-radius:99px;background:#fff;color:#555;box-shadow:0 2px 0 rgba(0,0,0,.1)}
   .pill.sel{background:#3b3b58;color:#fff}
-  .card{width:26vw;padding:2.2vh 1vw;display:flex;flex-direction:column;align-items:center;gap:1.2vh}
-  .card .em{font-size:clamp(50px,7vw,130px);line-height:1}
-  .big.card{font-size:clamp(20px,3vw,54px);white-space:nowrap}
+  .card{width:20.5vw;padding:2vh 1vw;display:flex;flex-direction:column;align-items:center;gap:1.2vh}
+  .card .em{font-size:clamp(44px,6vw,110px);line-height:1}
+  .big.card{font-size:clamp(18px,2.5vw,46px);white-space:nowrap}
   .card small{font-size:.45em}
   .topbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:2vh 2vw;z-index:5;gap:1vw}
   .icon{font-size:clamp(24px,3vw,50px);background:#fff;border-radius:50%;width:clamp(48px,5.5vw,96px);height:clamp(48px,5.5vw,96px);box-shadow:0 .4vw 0 rgba(0,0,0,.12);flex:none}
@@ -142,6 +142,54 @@
     #ffRoll{font-size:7vw}
     .ffcard{font-size:4.5vw;border-radius:4vw}
     #ffEnd{flex-direction:row}
+  }
+
+  /* 생쥐만세 */
+  .mcbtn{background:linear-gradient(135deg,#ffd43b,#f08c00)}
+  #mcscreen{background:linear-gradient(180deg,#fff3bf,#ffe8cc)}
+  #mcMsg{position:absolute;top:10vh;left:3vw;right:3vw;text-align:center;font-size:clamp(20px,2.8vw,50px)}
+  .mcmain{top:17vh}
+  #mcBoard{position:relative;width:min(70vw,118vh);height:min(46.6vw,78vh);background:#8fd19e;border-radius:3vh;box-shadow:inset 0 0 0 1vh #69b578,0 1vh 0 rgba(0,0,0,.1)}
+  .mcsp{position:absolute;width:5.3%;height:7.6%;transform:translate(-50%,-50%);background:#fff8e6;border-radius:1vh;border:.3vh solid #d9c79a;display:flex;flex-wrap:wrap;align-content:center;justify-content:center}
+  .mcsp.cat::before{content:"🐾";position:absolute;font-size:1.6vh;opacity:.35;top:.1vh;left:.2vh}
+  .mcsp.ent{border-color:#f08c00;background:#ffe066}
+  .mcsp i{position:absolute;bottom:-2.2vh;font-size:1.4vh;font-style:normal;white-space:nowrap}
+  .mcsp.dest,.mchouse.dest,.mcpara.dest{animation:glow 0.8s infinite alternate;cursor:pointer;z-index:4}
+  .mchouse{position:absolute;transform:translate(-50%,-50%);background:#fff;border:.4vh solid #f08c00;border-radius:2vh;padding:.6vh 1vh;text-align:center;font-size:clamp(12px,1.5vw,24px);min-width:9%}
+  .mchouse b{display:block;font-size:1.3em}
+  .mchouse span{font-size:.75em;opacity:.7}
+  .mchome,.mcpara{position:absolute;top:50%;transform:translate(-50%,-50%);width:27%;height:38%;border-radius:2vh;background:#fffdf5;border:.4vh dashed #b08d57;text-align:center;font-size:clamp(14px,1.7vw,28px);padding:1vh}
+  .mchome{left:32%} .mcpara{left:68%;border-style:solid;border-color:#f59f00;background:#fff3bf}
+  .mcpara span{display:block;font-size:.8em}
+  .mcmice{display:flex;flex-wrap:wrap;justify-content:center;gap:.3vh;margin-top:.5vh}
+  .mouse{font-size:min(2.6vh,1.9vw);line-height:1;border-radius:50%;background:var(--mc);padding:.25vh;box-shadow:0 0 0 .25vh #fff;cursor:pointer}
+  .mcsp .mouse{font-size:min(2vh,1.5vw)}
+  .mouse.can{animation:glow .8s infinite alternate}
+  .mouse.chosen{outline:.4vh solid #3b3b58;transform:scale(1.3)}
+  .mccat{position:absolute;font-size:min(6vh,4.4vw);transform:translate(-50%,-75%);transition:left .4s ease,top .4s ease;z-index:5;pointer-events:none;filter:drop-shadow(0 .4vh .3vh rgba(0,0,0,.3))}
+  .mccat.fast{filter:drop-shadow(0 0 1vh #ff6b6b)}
+  #mcDice{--h:7vh;width:14vh;height:14vh;perspective:700px;cursor:pointer}
+  #mcDice.toss{animation:toss 1.35s ease-out}
+  .catface{font-size:6vh;position:relative}
+  .catface em{position:absolute;right:-1.2vh;bottom:-1.2vh;font-size:3.2vh;font-style:normal;background:#e03131;color:#fff;border-radius:50%;width:4vh;height:4vh;display:flex;align-items:center;justify-content:center}
+  #mcEndBox{display:none;flex-direction:column;gap:1.4vh;align-items:stretch}
+  .mcr{background:#fff;border-left:1vh solid var(--k);border-radius:1.5vh;padding:.8vh 1.5vw;font-size:clamp(16px,2vw,32px)}
+  .mcr small{opacity:.6;font-size:.7em}
+  @media (orientation: portrait){
+    #mcMsg{top:8vh;font-size:4.6vw}
+    .mcmain{top:15vh}
+    #mcBoard{width:96vw;height:64vw}
+    .mouse{font-size:2.6vw} .mcsp .mouse{font-size:2.2vw}
+    .mchouse{font-size:2.4vw} .mchome,.mcpara{font-size:2.8vw}
+    .mccat{font-size:7vw}
+    #mcDice{--h:6vh;width:12vh;height:12vh}
+    #mcEndBox{width:92vw}
+    #mcscreen .topbar{align-items:flex-start}
+    #mcScore{flex-wrap:wrap;justify-content:flex-end;gap:1vw}
+    #mcScore .chip{font-size:3.2vw;padding:.3vh 2vw}
+    #mcMsg{top:13vh} .mcmain{top:19vh}
+    .mchouse{min-width:11%;padding:.3vh .6vh}
+    .mchouse span{display:none}
   }
   /* 마음 놀이 */
   .scene{font-size:clamp(70px,11vw,200px);line-height:1}
@@ -280,7 +328,7 @@
     <button class="pill" id="voiceToggle">꺼짐</button>
   </div>
   <div class="note" id="voiceNote"></div>
-  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v7</div>
+  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v8</div>
 </section>
 
 <!-- 놀이 고르기 -->
@@ -294,6 +342,7 @@
     <button class="big red card" data-game="heart"><span class="em">💖</span>마음 놀이<small data-lv="heart"></small></button>
     <button class="big blue card" data-game="chain"><span class="em">🔗</span>끝말잇기<small data-lv="chain"></small></button>
     <button class="big ffbtn card" data-game="firefly"><span class="em">🧚</span>반디요정<small data-lv="firefly"></small></button>
+    <button class="big mcbtn card" data-game="mouse"><span class="em">🐭</span>생쥐만세<small>2~4명 같이</small></button>
   </div>
   <div class="sub" id="menuSub"></div>
 </section>
@@ -320,6 +369,35 @@
       <button class="big orange" id="ffRoll">🎲 굴리기</button>
       <div id="ffCard"></div>
       <div id="ffEnd"><button class="big green small" id="ffAgain">🔁 한 판 더</button><button class="big blue small" id="ffMenuB">🎲 다른 놀이</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 생쥐만세: 누가 할까 -->
+<section id="mcsetup" class="screen">
+  <h2>🐭 생쥐만세 🧀</h2>
+  <div class="sub">누구누구 같이 할까요? (2~4명)</div>
+  <div class="pills" id="mcWho" style="font-size:clamp(20px,2.6vw,44px)"></div>
+  <div class="lesson" style="max-width:86vw;text-align:left">
+    🎲 주사위: <b>1·1(고양이)·2·3·4·5</b> — 숫자만큼 내 생쥐 한 마리를 옮겨요<br>
+    🐈 고양이 면(1)이 나오면: 내 생쥐 한 마리를 1칸 옮기고 → 고양이가 움직여요 (한 바퀴 돌면 2칸씩!)<br>
+    🏠 모퉁이 친구 집(🧀1·2·3·4)에 들어가면 치즈를 받고 안전해요 · 끝까지 가면 🧀 치즈 천국(6조각)<br>
+    ⚠️ 고양이가 지나가거나 멈춘 칸의 생쥐는 잡혀요 · 한 칸에 생쥐는 4마리까지 · 치즈를 가장 많이 모은 사람이 이겨요
+  </div>
+  <div class="row"><button class="big green small" id="mcGo">▶ 시작!</button><button class="big blue small" id="mcBack">🎲 다른 놀이</button></div>
+</section>
+
+<!-- 생쥐만세 게임 -->
+<section id="mcscreen" class="screen">
+  <div class="topbar"><button class="icon" id="mcHomeBtn" title="놀이 고르기">🏠</button><div class="score" id="mcScore"></div></div>
+  <div id="mcMsg"></div>
+  <div class="ffmain mcmain">
+    <div id="mcBoard"></div>
+    <div class="ffside">
+      <div id="mcDice" class="dice3d"><div class="cube" id="mcCube"></div></div>
+      <button class="big orange" id="mcRoll">🎲 굴리기</button>
+      <button class="pill" id="mcSkip" style="display:none"></button>
+      <div id="mcEndBox"><div id="mcRank"></div><button class="big green small" id="mcAgain">🔁 한 판 더</button><button class="big blue small" id="mcMenuB">🎲 다른 놀이</button></div>
     </div>
   </div>
 </section>
@@ -556,6 +634,7 @@ $('#toMenu').onclick=()=>openMenu(false);
 document.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>{
   audio(); sPop(); hush(); S.game=b.dataset.game; S.duo={turns:0,max:10,cheers:0}; S.chain=null;
   if(S.game==='firefly') return startFirefly();
+  if(S.game==='mouse') return mcSetupScreen();
   show('game'); $('#cheerTip').style.display = 'none'; $('#cheerBtn').style.display = S.mode==='duo' ? 'block' : 'none'; if(S.mode==='duo') showCheerTip();
   round(true);
 });
@@ -1189,6 +1268,231 @@ async function ffEnd(rid){
   $('#ffHome').onclick=()=>openMenu(false);
   $('#ffAgain').onclick=()=>{ audio(); startFirefly(); };
   $('#ffMenuB').onclick=()=>openMenu(false);
+})();
+
+
+// ================= 7. 생쥐만세 (Viva Topo! 규칙) =================
+// 공식 규칙: 주사위 1·1(고양이)·2·3·4·5 / 칸당 생쥐 최대 4마리 / 친구 집 4곳(치즈 1·2·3·4조각 각 4개) / 치즈 천국(통치즈=6조각 4개)
+// 고양이: 1바퀴째 고양이 칸 1개씩, 2바퀴째 2개씩 / 고양이가 지나가거나 멈춘 칸의 생쥐는 탈락 / 집에 남은 생쥐는 고양이가 집 입구를 지나면 탈락
+const MC_L = 36;                    // 길 칸 수 (1~36), 0 = 생쥐 집(출발), 37 이상 = 치즈 천국
+const MC_R = MC_L + 1;              // 고양이 한 바퀴 길이
+const MC_HOUSES = [ {e:[4,5], v:1, at:[92,9]}, {e:[12,13], v:2, at:[92,91]}, {e:[22,23], v:3, at:[8,91]}, {e:[30,31], v:4, at:[8,9]} ];
+const MC_DIE = [ {n:1,cat:true}, {n:1,cat:true}, {n:2}, {n:3}, {n:4}, {n:5} ];
+const MC_PEOPLE = {
+  민지:{face:'👧', col:'#ff6b9d'}, 민국:{face:'👦', col:'#4dabf7'}, 엄마:{face:'👩', col:'#ff922b'}, 아빠:{face:'👨', col:'#37b24d'}, 컴퓨터:{face:'🤖', col:'#9775fa', bot:true}
+};
+let M=null;
+const mcIsCat = p => p>0 && p<=MC_L && p%2===0;              // 짝수 칸 = 고양이 발자국 칸
+function mcPos(p){                                            // 길 칸 위치(%)
+  const x0=17,x1=83,y0=21,y1=79, W=x1-x0, H=y1-y0, per=2*(W+H);
+  let d=((p-0.5)/MC_L)*per + W/2;  d%=per;
+  if(d<W) return [x0+d, y0]; d-=W; if(d<H) return [x1, y0+d]; d-=H; if(d<W) return [x1-d, y1]; d-=W; return [x0, y1-d];
+}
+function mcHousePos(h){ return h.at; }
+function mcSetupScreen(){
+  hush(); S.rid++; S.game='mouse';
+  const sel = S.mode==='duo' ? ['민지','민국'] : [S.kid,'컴퓨터'];
+  const box=$('#mcWho'); box.innerHTML='';
+  Object.keys(MC_PEOPLE).forEach(n=>{ const b=mk('button','pill'+(sel.includes(n)?' sel':''), `${MC_PEOPLE[n].face} ${n}`); b.dataset.n=n;
+    b.onclick=()=>{ b.classList.toggle('sel'); const c=document.querySelectorAll('#mcWho .sel').length; if(c>4){ b.classList.remove('sel'); say('네 명까지 할 수 있어요'); } }; box.appendChild(b); });
+  show('mcsetup');
+  say('생쥐만세! 누구누구 같이 할까요? 두 명에서 네 명까지 골라요.');
+}
+function mcStart(){
+  const names=[...document.querySelectorAll('#mcWho .sel')].map(b=>b.dataset.n);
+  if(names.length<2){ say('두 명 이상 골라 주세요!'); return; }
+  audio();
+  const per = names.length===2 ? 5 : 4;
+  M={ players: names.map(n=>({n, face:MC_PEOPLE[n].face, col:MC_PEOPLE[n].col, bot:!!MC_PEOPLE[n].bot, mice:Array.from({length:per},()=>({p:0, st:'home'})), cheese:0, got:[]})),
+      turn:0, cat: Math.round(MC_R*(names.length===2?0.5:names.length===3?0.4:0.3)/2)*2,
+      houses: MC_HOUSES.map(h=>({...h, left:4})), wheels:4, phase:'roll', roll:null, sel:null, rot:[0,0] };
+  M.turn=rnd(M.players.length);
+  show('mcscreen'); mcRender(); mcLoop(++S.rid, true);
+}
+const mcP = () => M.players[M.turn];
+const mcName = p => p.bot ? '컴퓨터' : (MC_PEOPLE[p.n] && (p.n==='엄마'||p.n==='아빠') ? p.n : nameI(p.n));
+function mcOnTrack(){ const a=[]; M.players.forEach((pl,pi)=>pl.mice.forEach((m,mi)=>{ if(m.st==='home'||m.st==='track') a.push({pi,mi,m}); })); return a; }
+function mcCount(p){ return mcOnTrack().filter(x=>x.m.st==='track' && x.m.p===p).length; }
+const mcCatRing = () => M.cat % MC_R;
+// 한 마리를 r칸 움직일 때 갈 수 있는 곳들
+function mcOptions(pi, mi, r){
+  const m=M.players[pi].mice[mi]; if(!(m.st==='home'||m.st==='track')) return [];
+  const opts=[], start=m.p;
+  M.houses.forEach((h,hi)=>{ if(h.e.some(e=>e>=Math.max(start,1) && e<=start+r-1 && e>=start)) opts.push({type:'house', hi}); });
+  if(start+r>MC_L){ opts.push({type:'paradise'}); return opts; }
+  let t=start+r;
+  while(t>start && (mcCount(t)>=4 || (t%MC_R)===mcCatRing())) t--;     // 꽉 찬 칸/고양이 칸이면 앞 칸에 멈춤
+  if(t>start) opts.push({type:'move', to:t});
+  return opts;
+}
+function mcMovable(pi, r){ return M.players[pi].mice.map((m,mi)=>({mi,o:mcOptions(pi,mi,r)})).filter(x=>x.o.length); }
+function mcRender(){
+  const b=$('#mcBoard'); b.innerHTML='';
+  b.appendChild(mk('div','mchome',`<b>🏠 생쥐 집</b><div class="mcmice" id="mcHomeMice"></div>`));
+  b.appendChild(mk('div','mcpara',`<b>🧀 치즈 천국</b><span>통치즈(6) ×${M.wheels}</span><div class="mcmice" id="mcParaMice"></div>`));
+  for(let p=1;p<=MC_L;p++){ const [x,y]=mcPos(p); const s=mk('div','mcsp'+(mcIsCat(p)?' cat':'')+(MC_HOUSES.some(h=>h.e.includes(p))?' ent':''), `<i>${p===1?'출발':''}</i>`); s.dataset.p=p; s.style.left=x+'%'; s.style.top=y+'%'; b.appendChild(s); }
+  M.houses.forEach((h,hi)=>{ const [x,y]=mcHousePos(h); const e=mk('div','mchouse',`<b>🧀${h.v}</b><span>남은 치즈 ${h.left}</span><div class="mcmice"></div>`); e.dataset.hi=hi; e.style.left=x+'%'; e.style.top=y+'%'; b.appendChild(e); });
+  // 생쥐들
+  M.players.forEach((pl,pi)=>pl.mice.forEach((m,mi)=>{
+    const d=mk('div','mouse','🐭'); d.style.setProperty('--mc',pl.col); d.dataset.pi=pi; d.dataset.mi=mi; d.onclick=()=>mcTapMouse(pi,mi);
+    if(m.st==='home') $('#mcHomeMice').appendChild(d);
+    else if(m.st==='track') b.querySelector(`.mcsp[data-p="${m.p}"]`).appendChild(d);
+    else if(m.st==='house') b.querySelector(`.mchouse[data-hi="${m.hi}"] .mcmice`).appendChild(d);
+    else if(m.st==='para') $('#mcParaMice').appendChild(d);
+  }));
+  const cr=mcCatRing(); const [cx,cy]= cr===0 ? [50,40] : mcPos(cr);
+  const cat=mk('div','mccat','🐈'); cat.style.left=cx+'%'; cat.style.top=cy+'%'; if(M.cat>=MC_R) cat.classList.add('fast'); b.appendChild(cat);
+  mcScore();
+}
+function mcScore(){
+  $('#mcScore').innerHTML = M.players.map((p,i)=>{ const alive=p.mice.filter(m=>m.st==='home'||m.st==='track').length;
+    return `<span class="chip ${i===M.turn?'now':''}" style="--k:${p.col}">${p.face} ${p.n} 🧀${p.cheese} <small>🐭${alive}</small></span>`; }).join('')
+    + `<span class="chip">🐈 ${M.cat>=MC_R?'2바퀴째⚡':'1바퀴째'}</span>`;
+}
+const mcMsg = t => $('#mcMsg').innerHTML=t;
+function mcDone(){ return mcOnTrack().length===0; }
+async function mcLoop(rid, first){
+  const alive=()=>rid===S.rid; if(!alive()) return;
+  if(mcDone()) return mcEnd(rid);
+  M.phase='roll'; M.sel=null; M.roll=null; mcRender(); $('#mcSkip').style.display='none';
+  const p=mcP();
+  mcMsg(`${p.face} <b>${mcName(p)} 차례!</b> ${p.bot?'':'🎲 주사위를 굴려요!'}`);
+  $('#mcRoll').disabled=p.bot;
+  if(first) { await say('생쥐만세! 고양이를 피해서 치즈를 모아요! 고양이는 1이 나올 때 움직여요.'); if(!alive()) return; }
+  if(p.bot){ await say('컴퓨터 차례!'); if(!alive()) return; await wait(400); mcRoll(rid); }
+  else await say(`${mcName(p)} 차례! 주사위를 굴려!`);
+}
+function mcRollClick(){ if(M && M.phase==='roll' && !mcP().bot){ audio(); mcRoll(S.rid); } }
+async function mcRoll(rid){
+  const alive=()=>rid===S.rid; if(!alive()||M.phase!=='roll') return;
+  M.phase='rolling'; $('#mcRoll').disabled=true;
+  const fi=rnd(6), face=MC_DIE[fi], cube=$('#mcCube'), box=$('#mcDice');
+  box.classList.remove('toss'); void box.offsetWidth; box.classList.add('toss');
+  const sp=2+rnd(2);
+  M.rot=[FACE_ROT[fi][0]+360*sp+(M.rot[0]-M.rot[0]%360), FACE_ROT[fi][1]+360*(sp+1)+(M.rot[1]-M.rot[1]%360)];
+  cube.style.transform=`rotateX(${M.rot[0]}deg) rotateY(${M.rot[1]}deg)`;
+  for(let i=0;i<9;i++) tone(300+rnd(500),200,.05,'square',.06,i*.11);
+  await wait(1400); if(!alive()) return;
+  M.roll=face; const p=mcP(), pi=M.turn;
+  if(face.cat){
+    tone(400,200,.3,'sawtooth',.12); 
+    const mv=mcMovable(pi,1);
+    if(!mv.length){ await say('야옹! 고양이가 움직여요!'); if(!alive()) return; return mcCatMove(rid); }
+    mcMsg(`🐈 <b>고양이 주사위!</b> 먼저 생쥐 한 마리를 1칸 옮기고, 고양이가 움직여요`);
+    M.phase='pickMouse';
+    if(p.bot){ await say('야옹! 고양이가 나왔어!'); if(!alive()) return; await wait(500); return mcBotMove(rid, 1); }
+    await say(`야옹! 고양이가 나왔어! 먼저 생쥐 한 마리를 한 칸 옮겨. 그다음 고양이가 움직여!`);
+    mcHighlight(mv);
+    return;
+  }
+  const r=face.n, mv=mcMovable(pi,r);
+  if(!mv.length){ mcMsg(`${r}! 움직일 생쥐가 없어요`); await say(`${r}! 움직일 생쥐가 없어.`); if(!alive()) return; return mcNext(rid); }
+  M.phase='pickMouse';
+  mcMsg(`🎲 <b>${r}</b>! 움직일 생쥐 🐭를 골라요`);
+  if(p.bot){ await say(`${r}!`); if(!alive()) return; await wait(400); return mcBotMove(rid, r); }
+  await say(`${['','한','두','세','네','다섯'][r]} 칸! 움직일 생쥐를 골라!`);
+  mcHighlight(mv);
+}
+function mcHighlight(mv){ mv.forEach(x=>{ const e=document.querySelector(`#mcBoard .mouse[data-pi="${M.turn}"][data-mi="${x.mi}"]`); if(e) e.classList.add('can'); }); }
+function mcTapMouse(pi, mi){
+  if(!M || mcP().bot || pi!==M.turn || !(M.phase==='pickMouse'||M.phase==='pickDest')) return;
+  const r = M.roll.cat ? 1 : M.roll.n, o=mcOptions(pi,mi,r); if(!o.length) return;
+  audio(); sPop(); mcRender(); mcHighlight(mcMovable(pi,r));
+  document.querySelector(`#mcBoard .mouse[data-pi="${pi}"][data-mi="${mi}"]`).classList.add('chosen');
+  M.sel={mi, o}; M.phase='pickDest';
+  if(o.length===1) return mcDo(S.rid, pi, mi, o[0]);
+  // 갈 곳이 여러 개: 표시하고 고르게
+  o.forEach(op=>{ let el;
+    if(op.type==='move') el=document.querySelector(`#mcBoard .mcsp[data-p="${op.to}"]`);
+    if(op.type==='house') el=document.querySelector(`#mcBoard .mchouse[data-hi="${op.hi}"]`);
+    if(op.type==='paradise') el=document.querySelector('#mcBoard .mcpara');
+    if(el){ el.classList.add('dest'); el.onclick=(ev)=>{ ev.stopPropagation(); if(M.phase==='pickDest') mcDo(S.rid, pi, mi, op); }; }
+  });
+  const hs=o.filter(x=>x.type==='house').map(x=>M.houses[x.hi]);
+  mcMsg(`⭐ 반짝이는 곳 중에 골라요! ${hs.length?`🧀${hs[0].v} 친구 집에 숨을까, 계속 갈까?`:''}`);
+  say(hs.length ? `친구 집에 숨으면 치즈 ${hs[0].v}조각! 아니면 더 멀리 갈 수도 있어. 반짝이는 곳을 눌러!` : '반짝이는 곳을 눌러!');
+}
+async function mcDo(rid, pi, mi, op){
+  const alive=()=>rid===S.rid; M.phase='moving';
+  const pl=M.players[pi], m=pl.mice[mi];
+  if(op.type==='move'){
+    while(m.p<op.to){ m.p++; m.st='track'; mcRender(); tone(800,1000,.06,'triangle',.12); await wait(230); if(!alive()) return; }
+  } else if(op.type==='house'){
+    const h=M.houses[op.hi]; m.st='house'; m.hi=op.hi;
+    if(h.left>0){ h.left--; pl.cheese+=h.v; pl.got.push(h.v); sDing(); mcRender(); floatUp('🧀+'+h.v);
+      await say(`${pl.bot?'컴퓨터':mcName(pl)} 생쥐가 친구 집에 쏙! 치즈 ${h.v}조각!`); }
+    else { mcRender(); await say('친구 집에 숨었어! 그런데 치즈가 다 떨어졌네.'); }
+  } else {
+    m.st='para';
+    if(M.wheels>0){ M.wheels--; pl.cheese+=6; pl.got.push(6); sFan(); mcRender(); floatUp('🧀+6');
+      await say(`우와! 치즈 천국 도착! 통치즈 하나, 여섯 조각!`); }
+    else { mcRender(); await say('치즈 천국 도착! 그런데 통치즈가 다 떨어졌어.'); }
+  }
+  if(!alive()) return;
+  if(M.roll.cat) return mcCatMove(rid);
+  mcNext(rid);
+}
+async function mcCatMove(rid){
+  const alive=()=>rid===S.rid; M.phase='cat';
+  const steps = M.cat>=MC_R ? 2 : 1;
+  mcMsg(`🐈 고양이가 ${steps===2?'두 칸씩 성큼성큼':'살금살금'} 움직여요!`);
+  for(let s=0;s<steps;s++){
+    const from=M.cat; let to=M.cat; do{ to++; }while(!mcIsCat(to%MC_R));
+    const wasLap1 = from<MC_R;
+    M.cat=to; tone(300,180,.2,'sawtooth',.1);
+    // 지나가거나 멈춘 칸의 생쥐 잡기
+    const caught=[];
+    mcOnTrack().forEach(({pi,mi,m})=>{ for(let k=0;k<4;k++){ const ab=m.p+k*MC_R; if(ab>from && ab<=to){ caught.push({pi,mi}); break; } } });
+    caught.forEach(({pi,mi})=>{ M.players[pi].mice[mi].st='out'; });
+    mcRender(); await wait(500); if(!alive()) return;
+    if(caught.length){ sBoop();
+      const who=[...new Set(caught.map(c=>M.players[c.pi]))];
+      await say(`앗! 고양이한테 생쥐 ${caught.length}마리가 잡혔어! ${who.map(p=>p.bot?'컴퓨터':mcName(p)).join(', ')} 괜찮아, 다른 생쥐가 있어!`); if(!alive()) return; }
+    if(wasLap1 && M.cat>=MC_R){ await say('고양이가 한 바퀴를 돌았어! 이제 두 칸씩 빨리 움직여! 조심해!'); if(!alive()) return; }
+  }
+  mcNext(rid);
+}
+// 컴퓨터: 위험한 생쥐는 친구 집으로, 아니면 고양이 뒤에서 안전하게
+async function mcBotMove(rid, r){
+  const pi=M.turn, mv=mcMovable(pi,r); const cr=mcCatRing();
+  let best=null, bs=-1e9;
+  mv.forEach(({mi,o})=>{ const m=M.players[pi].mice[mi]; const danger = ((m.p - cr + MC_R)%MC_R);   // 고양이 앞쪽 거리
+    o.forEach(op=>{ let s=0;
+      if(op.type==='paradise') s=100;
+      else if(op.type==='house'){ const h=M.houses[op.hi]; s = (h.left?h.v*10:2) + (danger>0 && danger<10 ? 30 : 0) + (M.cat>=MC_R?25:0) - (op.hi<2 && M.cat<MC_R*0.6 ? 15:0); }
+      else { const nd=((op.to - cr + MC_R)%MC_R); s = (op.to-m.p) + (nd>0 && nd<8 ? -25 : 0) + (m.st==='home' && M.cat>MC_R*0.6 ? 20 : 0) + Math.random()*3; }
+      if(s>bs){ bs=s; best={mi,op}; } }); });
+  if(!best) return mcNext(rid);
+  const e=document.querySelector(`#mcBoard .mouse[data-pi="${pi}"][data-mi="${best.mi}"]`); if(e) e.classList.add('chosen');
+  await wait(500); if(rid!==S.rid) return; mcDo(rid, pi, best.mi, best.op);
+}
+function mcNext(rid){ if(rid!==S.rid) return; M.turn=(M.turn+1)%M.players.length; mcLoop(rid); }
+async function mcEnd(rid){
+  const alive=()=>rid===S.rid; M.phase='end'; mcRender();
+  const rank=[...M.players].sort((a,b)=>b.cheese-a.cheese), top=rank[0].cheese, winners=rank.filter(p=>p.cheese===top);
+  M.players.forEach(p=>{ if(P[p.n]){ P[p.n].stars+=p.cheese; } }); save();
+  $('#mcRank').innerHTML = rank.map((p,i)=>`<div class="mcr" style="--k:${p.col}">${p.cheese===top?'👑':(i+1)+'등'} ${p.face} ${p.n} <b>🧀 ${p.cheese}조각</b> <small>${p.got.join('+')||'-'}</small></div>`).join('');
+  $('#mcEndBox').style.display='flex';
+  mcMsg('🏁 게임 끝! 치즈를 세어 봐요');
+  sFan();
+  const wn=winners.map(p=>p.bot?'컴퓨터':mcName(p));
+  if(winners.length>1) await say(`와! ${wn.join(', ')} 똑같이 치즈 ${top}조각! 공동 우승!`);
+  else await say(`${winners[0].bot?'컴퓨터':j(mcName(winners[0]),'이','가')} 이겼어요! 치즈 ${top}조각!`);
+  if(!alive()) return;
+  const others=rank.filter(p=>p.cheese!==top && !p.bot);
+  for(const p of others){ await say(`${p.n==='엄마'||p.n==='아빠'?p.n:call(p.n)}, 치즈 ${p.cheese}조각 모았어! 고양이를 피해 끝까지 열심히 한 게 정말 멋져!`); if(!alive()) return; }
+  await say('이긴 사람은 다들 잘했어! 하고, 다른 사람은 축하해! 하고 말해 줄까? 그리고 다 같이 하이파이브! 짝!'); sClap(); setTimeout(sClap,120);
+}
+
+(function(){
+  const T=['translateZ(var(--h))','rotateY(90deg) translateZ(var(--h))','rotateY(180deg) translateZ(var(--h))','rotateY(-90deg) translateZ(var(--h))','rotateX(90deg) translateZ(var(--h))','rotateX(-90deg) translateZ(var(--h))'];
+  const pips={1:[5],2:[1,9],3:[1,5,9],4:[1,3,7,9],5:[1,3,5,7,9]};
+  $('#mcCube').innerHTML = MC_DIE.map((f,i)=>`<div class="face" style="transform:${T[i]}">${f.cat?'<span class="catface">🐱<em>1</em></span>':`<div class="pips">${[1,2,3,4,5,6,7,8,9].map(n=>`<i class="${pips[f.n].includes(n)?'on':''}"></i>`).join('')}</div>`}</div>`).join('');
+  $('#mcRoll').onclick=mcRollClick; $('#mcDice').onclick=mcRollClick;
+  $('#mcGo').onclick=mcStart; $('#mcBack').onclick=()=>openMenu(false);
+  $('#mcHomeBtn').onclick=()=>openMenu(false);
+  $('#mcAgain').onclick=()=>{ $('#mcEndBox').style.display='none'; mcSetupScreen(); };
+  $('#mcMenuB').onclick=()=>openMenu(false);
 })();
 
 // ================= 같이 하기 결과 =================
