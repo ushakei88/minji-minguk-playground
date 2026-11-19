@@ -31,8 +31,9 @@
   .pills{display:flex;gap:1vw;align-items:center;font-size:clamp(14px,1.6vw,26px);flex-wrap:wrap;justify-content:center}
   .pill{font-size:inherit;padding:.6vh 1.4vw;border-radius:99px;background:#fff;color:#555;box-shadow:0 2px 0 rgba(0,0,0,.1)}
   .pill.sel{background:#3b3b58;color:#fff}
-  .card{width:21vw;padding:3.5vh 1vw;display:flex;flex-direction:column;align-items:center;gap:1.2vh}
-  .card .em{font-size:clamp(56px,8vw,150px);line-height:1}
+  .card{width:17vw;padding:3vh 1vw;display:flex;flex-direction:column;align-items:center;gap:1.2vh}
+  .card .em{font-size:clamp(50px,7vw,130px);line-height:1}
+  .big.card{font-size:clamp(20px,2.7vw,50px);white-space:nowrap}
   .card small{font-size:.45em}
   .topbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:2vh 2vw;z-index:5;gap:1vw}
   .icon{font-size:clamp(24px,3vw,50px);background:#fff;border-radius:50%;width:clamp(48px,5.5vw,96px);height:clamp(48px,5.5vw,96px);box-shadow:0 .4vw 0 rgba(0,0,0,.12);flex:none}
@@ -85,6 +86,14 @@
   .bundle.lit{transform:scale(1.1)}
   #choices{display:flex;gap:3vw;justify-content:center;width:100%;margin-top:2.5vh}
   .choice{font-size:clamp(36px,5.5vw,100px);width:12vw;height:12vw;border-radius:50%;padding:0}
+  .chainhist{font-size:.42em;opacity:.75;margin-bottom:1vh}
+  .chainhist span{background:#fff;border-radius:99px;padding:.2vh 1vw}
+  #prompt .tgt u{color:#3b3b58;background:#ffe066;text-decoration:none;border-radius:.5vw;padding:0 .3vw}
+  .hintbox{display:flex;gap:2.5vw;flex-wrap:wrap;justify-content:center;width:100%}
+  .chaintools{display:flex;gap:2vw;align-items:center;justify-content:center;width:100%;font-size:clamp(18px,2.2vw,36px)}
+  .timebar{width:30vw;height:1.6vh;background:#fff;border-radius:99px;overflow:hidden}
+  .timebar i{display:block;height:100%;width:100%;background:#ff8fb8;transition:width .2s linear}
+  .txtbtn.hintw{letter-spacing:0}
   /* 마음 놀이 */
   .scene{font-size:clamp(70px,11vw,200px);line-height:1}
   .opts{display:flex;flex-direction:column;gap:1.8vh;width:min(80vw,1200px)}
@@ -147,6 +156,7 @@
     .pill{padding:.8vh 3vw}
     .note{font-size:3.2vw}
     .card{width:42vw;padding:2.5vh 2vw}
+    .big.card{font-size:6vw}
     .card .em{font-size:15vw}
     .icon{width:12vw;height:12vw;font-size:6vw}
     .chip{font-size:4vw;padding:.4vh 2.5vw}
@@ -221,7 +231,7 @@
     <button class="pill" id="voiceToggle">꺼짐</button>
   </div>
   <div class="note" id="voiceNote"></div>
-  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v5</div>
+  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v6</div>
 </section>
 
 <!-- 놀이 고르기 -->
@@ -233,6 +243,7 @@
     <button class="big green card" data-game="eng"><span class="em">🔤</span>영어 놀이<small data-lv="eng"></small></button>
     <button class="big purple card" data-game="cnt"><span class="em">🍎</span>몇 개일까?<small data-lv="cnt"></small></button>
     <button class="big red card" data-game="heart"><span class="em">💖</span>마음 놀이<small data-lv="heart"></small></button>
+    <button class="big blue card" data-game="chain"><span class="em">🔗</span>끝말잇기<small data-lv="chain"></small></button>
   </div>
   <div class="sub" id="menuSub"></div>
 </section>
@@ -277,7 +288,8 @@
     숫자 풍선: 1 숫자 1~10 · 2 숫자 1~20 · 3 앞뒤 수 · 4 덧셈(10까지) · 5 뺄셈(10까지) · 6 받아올림 덧셈 · 7 받아내림 뺄셈 · 8 몇십 몇 · 9 두 자리 덧셈·뺄셈 · 10 □ 구하기<br>
     영어 놀이: 1 동물 듣고 찾기 · 2 여러 단어 듣고 찾기 · 3 읽고 찾기 · 4 첫 글자 · 5 철자 고르기 · 6 문장 읽기<br>
     몇 개일까: 1 5까지 · 2 10까지 · 3 20까지 · 4 모으기(덧셈) · 5 남은 수(뺄셈) · 6 10개 묶음 세기<br>
-    마음 놀이: 1 기분 알기·고운 말 · 2 친구 관계·정직·이기고 졌을 때
+    마음 놀이: 1 기분 알기·고운 말 · 2 친구 관계·정직·이기고 졌을 때<br>
+    끝말잇기: 1 쉬움(그림 힌트 바로, 이어가기 쉬운 단어) · 2 보통(두 번 틀리면 힌트) · 3 어려움(세 글자 이상, 20초 제한)
   </div>
   <div class="row">
     <button class="pill" id="resetAll">기록 모두 지우기 (두 번 누르기)</button>
@@ -320,17 +332,19 @@ const other = k => k==='민지' ? '민국' : '민지';
 const KIDS = ['민지','민국'];
 const KCOL = {민지:'#ff8fb8', 민국:'#66b7ff'};
 const KFACE = {민지:'👧', 민국:'👦'};
-const GNAME = {num:'숫자 풍선', eng:'영어 놀이', cnt:'몇 개일까?', heart:'마음 놀이'};
-const MAXLV = {num:10, eng:6, cnt:6, heart:2};
+const GNAME = {num:'숫자 풍선', eng:'영어 놀이', cnt:'몇 개일까?', heart:'마음 놀이', chain:'끝말잇기'};
+const MAXLV = {num:10, eng:6, cnt:6, heart:2, chain:3};
 
 // ================= 저장 (이 노트북에만) =================
 const KEY = 'mmPlay_v2';
+const KIDS0 = ['민지','민국'];
 const DEF = {
-  민지:{lv:{num:4,eng:3,cnt:4,heart:2}, xp:{num:0,eng:0,cnt:0,heart:0}, stars:0, hearts:0},
-  민국:{lv:{num:1,eng:1,cnt:1,heart:1}, xp:{num:0,eng:0,cnt:0,heart:0}, stars:0, hearts:0}
+  민지:{lv:{num:4,eng:3,cnt:4,heart:2,chain:2}, xp:{num:0,eng:0,cnt:0,heart:0,chain:0}, stars:0, hearts:0},
+  민국:{lv:{num:1,eng:1,cnt:1,heart:1,chain:1}, xp:{num:0,eng:0,cnt:0,heart:0,chain:0}, stars:0, hearts:0}
 };
 let P;
-function load(){ try{ P = JSON.parse(localStorage.getItem(KEY)); }catch(e){} if(!P||!P.민지||!P.민국) P = JSON.parse(JSON.stringify(DEF)); }
+function load(){ try{ P = JSON.parse(localStorage.getItem(KEY)); }catch(e){} if(!P||!P.민지||!P.민국) P = JSON.parse(JSON.stringify(DEF));
+  KIDS0.forEach(k=>{ for(const g in DEF[k].lv){ if(P[k].lv[g]==null) P[k].lv[g]=DEF[k].lv[g]; if(P[k].xp[g]==null) P[k].xp[g]=0; } }); }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(P)); }catch(e){} }
 load();
 
@@ -474,7 +488,7 @@ function openMenu(greet){
 $('#toHome').onclick=()=>{ hush(); updHome(); show('home'); };
 $('#toMenu').onclick=()=>openMenu(false);
 document.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>{
-  audio(); sPop(); hush(); S.game=b.dataset.game; S.duo={turns:0,max:10,cheers:0};
+  audio(); sPop(); hush(); S.game=b.dataset.game; S.duo={turns:0,max:10,cheers:0}; S.chain=null;
   show('game'); $('#cheerTip').style.display = 'none'; $('#cheerBtn').style.display = S.mode==='duo' ? 'block' : 'none'; if(S.mode==='duo') showCheerTip();
   round(true);
 });
@@ -776,6 +790,126 @@ GEN.heart=(lv,kid)=>{
   return r;
 };
 
+
+// ================= 5. 끝말잇기 (말로 하기) =================
+const CW_RAW = `가방🎒 가위✂️ 가지🍆 가족👨‍👩‍👧‍👦 가을🍂 가수🎤 가게🏪 가구 가로등 가면🎭 가시 간식🍪 간호사 갈매기 감자🥔 감기🤧 강아지🐶 강물 개구리🐸 개미🐜 개나리 개울 거미🕷️ 거북이🐢 거울🪞 거인 건물🏢 겨울⛄ 고구마🍠 고래🐳 고무 고양이🐱 고추🌶️ 고기🍖 곰🐻 공⚽ 공룡🦖 공원 공주👸 공책📓 공기 과자🍪 과일🍎 과학 구름☁️ 구두👞 구슬 구멍 구급차🚑 국수🍜 국자 국기 군인 귀👂 귤🍊 그네 그림🖼️ 그릇 기린🦒 기차🚂 기타🎸 기름 기침 김밥🍙 김치 꽃🌸 꿀🍯 꿈 꼬리 나무🌳 나비🦋 나라 나이 나팔🎺 나침반🧭 낙타🐫 날개 남자 냄비 냉장고 너구리🦝 노래🎵 노루 노을 노트 놀이터 누나 눈❄️ 눈사람⛄ 눈썹 다리 다람쥐🐿️ 다리미 달🌙 달걀🥚 달팽이🐌 닭🐔 당근🥕 대추 대문 대나무🎋 도토리🌰 도서관📚 도마 도시락🍱 도깨비👹 도장 돌 돌고래🐬 동물 동생 동화 동굴 동전🪙 두부 두더지 딸기🍓 땅 땅콩🥜 떡 라면🍜 라디오📻 레몬🍋 로봇🤖 로켓🚀 리본🎀 마술🎩 마을 마차 마녀🧙 마당 마늘🧄 만두🥟 망치🔨 매미 머리 메뚜기🦗 멜론🍈 모자🧢 모래 모기🦟 목 목도리🧣 무 무지개🌈 무릎 무당벌레🐞 무대 문🚪 문어🐙 물💧 물고기🐟 물감🎨 물개🦭 물총 미끄럼틀 미소😊 미역 미술 미로 밀가루 바나나🍌 바다🌊 바위🪨 바지👖 바람🌬️ 바구니🧺 바퀴 박수👏 박물관 박쥐🦇 반지💍 발🦶 발가락 발자국👣 밤🌙 밥🍚 방 방울🔔 방석 방패🛡️ 배🍐 배꼽 배추🥬 배구🏐 배낭🎒 버스🚌 버섯🍄 버터🧈 벌🐝 별⭐ 병원🏥 보리 보물💎 보석💎 보름달🌕 복숭아🍑 부엉이🦉 부채 부엌 부츠👢 비☔ 비누🧼 비행기✈️ 비둘기🕊️ 비빔밥 비밀 빵🍞 빨대 사과🍎 사자🦁 사슴🦌 사탕🍬 사진📷 사다리🪜 사막🏜️ 산⛰️ 산타🎅 산책 산호🪸 상어🦈 상자📦 상추 새🐦 새우🦐 새싹🌱 색종이 생선🐟 생일🎂 서랍 서점 선물🎁 선생님 설탕 세수 소🐮 소금🧂 소나무🌲 소리 소방차🚒 소풍 소시지🌭 손✋ 손가락 손수건 손님 수박🍉 수영🏊 수건 수레 수저🥄 수첩 수달🦦 숟가락🥄 숲🌲 시계⏰ 시소 시장 시골 시금치 신발👟 실🧵 썰매🛷 씨앗🌱 아기👶 아빠👨 아이스크림🍦 악어🐊 안경👓 앵무새🦜 야구⚾ 양🐑 양말🧦 어깨 얼굴 얼음🧊 엄마👩 여우🦊 연필✏️ 연못 염소🐐 오리🦆 오이🥒 오징어🦑 오렌지🍊 오토바이🏍️ 옥수수🌽 요리🍳 요정🧚 요구르트 요요🪀 용🐉 우산☂️ 우유🥛 우주🪐 우체국 우물 우비 운동 울타리 원숭이🐵 원피스👗 유리 유치원 유령👻 의자🪑 이불 이름 이빨🦷 이마 이사 이야기 이웃 이슬 인형🧸 인사 일기 입👄 잎🍃 자동차🚗 자전거🚲 자석🧲 잠자리 장갑🧤 장난감🧸 장미🌹 장화 장구 저금통 접시🍽️ 젓가락🥢 정원 정글 조개🐚 조각 조끼 조약돌 종이📄 주스🧃 주머니 주사💉 주전자 주먹✊ 줄넘기 지구🌍 지도🗺️ 지우개 지갑👛 지렁이🪱 지붕 지하철🚇 집🏠 집게 차🚗 참새 창문🪟 책📖 책상 책가방🎒 천사👼 초🕯️ 초콜릿🍫 초가집 초록 추석 축구⚽ 치마👗 치즈🧀 치약 치킨🍗 치과 친구 침대🛏️ 칫솔🪥 카메라📷 캥거루🦘 케이크🍰 코👃 코끼리🐘 코알라🐨 콩 크레파스🖍️ 크레용🖍️ 크리스마스🎄 키위🥝 키보드⌨️ 타조 타이어 태양☀️ 토끼🐰 토마토🍅 토요일 튤립🌷 트럭🚚 트럼펫🎺 파 파도🌊 파리 파랑새 파인애플🍍 판다🐼 팽이 펭귄🐧 편지✉️ 포도🍇 포크🍴 피아노🎹 피자🍕 피리 하늘 하마🦛 학교🏫 할머니👵 할아버지👴 해☀️ 해바라기🌻 해적🏴‍☠️ 해파리🪼 햄버거🍔 호랑이🐯 호박🎃 호수 호두 홍시 화분🪴 화살 화장실🚽 휴지🧻 사람 다리 리듬 이웃집 기억 기사 기와 지느러미 수레 리모컨 구조 조랑말 말🐴 말벌 벌레🐛 레고🧱 고슴도치🦔 치타🐆 타악기 기러기 기념일 일요일 일출 출발 발레🩰 레슬링 링 매실 실내화 화가 가마 마스크😷 크림 림 임금님 님 기둥 둥지🪺 지팡이 이삿짐 짐 사랑💕 랑 낭떠러지 지렛대 대장 장승 승리🏆 이모 모형 형 형광펜 펜 편의점 점심 심장❤️ 장소 소원 원 원두막 막대기 기도 도로 로마 마라톤 톤 토성🪐 성🏰 성냥 냥 소년 연 연극 극장 장독 독수리🦅 리코더 더위 위 위로 노란색 색연필 필통 통조림 조림 임 바이올린🎻 린 인어 어부 부모 모래성 성탑 탑 탑승 승차 차례 예절 절 절벽 벽 벽돌🧱 돌멩이 이끼 끼니 니 이발소 소라 라켓🏸 켓 오두막 막 마중 중 중국 국물 물방울💧 울음 음악🎶 악기 기쁨 쁨 족발 내일 냇물 게🦀 등대 등산 면봉 식빵🍞 식탁 용궁 슬리퍼🩴 멍멍이🐶 네모 밥상 팔찌 팔꿈치 터널 근육💪 관람차🎡 굴뚝 전화기☎️ 전등 콩나물 술래 역사 퀴즈 석류 스키⛷️ 스케이트⛸️ 스티커 탕수육 진주 금붕어 금메달🥇 풍선🎈 풍차 영화🎬 계단 계란🥚 골목 골대🥅 경찰👮 경주 웃음😄 갑옷 글자 글씨 붕어빵 철봉 철새 녹차🍵 녹색 약국💊 솔방울 드럼🥁 럭비🏉 교실 교회⛪ 분수⛲ 살구 와플🧇 잉어 수첩 차표 표정 정류장 장마 마법 법 무궁화🌺 화요일 일등 등불 불꽃🎆 불고기 꽃병 병아리🐥 리어카 카드 드레스 스웨터 터미널 널뛰기 기분 분홍색 색칠 칠판 판사 사냥꾼 꾼 군고구마 마당놀이 이웃 웃옷 옷걸이 이슬비 비옷`;
+const CW=[], CEMO={};
+CW_RAW.split(/\s+/).forEach(t=>{ const m=t.match(/^([가-힣]+)(.*)$/); if(!m) return; const w=m[1];
+  if(w.length<2 || CW.includes(w)) return; CW.push(w); if(m[2]) CEMO[w]=m[2]; });
+function dueum(ch){
+  const c=ch.charCodeAt(0)-0xAC00; if(c<0||c>11171) return ch;
+  const cho=Math.floor(c/588), jung=Math.floor((c%588)/28), jong=c%28, Y=[2,6,7,12,17,20];
+  let nc=cho; if(cho===5) nc = Y.includes(jung)?11:2; else if(cho===2 && Y.includes(jung)) nc=11;
+  return String.fromCharCode(0xAC00+nc*588+jung*28+jong);
+}
+const lastSyl = w => w[w.length-1];
+const startsOf = w => { const l=lastSyl(w), d=dueum(l); return l===d ? [l] : [l,d]; };
+const ro = ch => { const c=ch.charCodeAt(0)-0xAC00; const jong=(c>=0&&c<=11171)?c%28:0; return ch + (jong && jong!==8 ? '으로' : '로'); };
+const minLenOf = lv => lv>=3 ? 3 : 2;
+function nextsOf(w, lv){ const st=startsOf(w), ml=minLenOf(lv); return CW.filter(x=>st.includes(x[0]) && !S.chain.used.has(x) && x.length>=ml); }
+function cleanWord(t){
+  let s=String(t).replace(/[^가-힣]/g,'');
+  for(const e of ['입니다','이에요','예요','이요','요']) if(s.endsWith(e) && s.length-e.length>=2){ s=s.slice(0,-e.length); break; }
+  return s;
+}
+function chainStart(lv){
+  const ml=minLenOf(lv);
+  S.chain={words:[], used:new Set(), fresh:true};
+  const pool=CW.filter(w=>w.length>=ml && w.length<=3 && nextsOf(w,lv).length>=4 && CEMO[w]);
+  const w=pick(pool.length?pool:CW); S.chain.words.push(w); S.chain.used.add(w);
+}
+// 컴퓨터 차례: 쉬운 레벨일수록 아이가 이어갈 수 있는 단어를 고름
+function computerWord(prev, lv){
+  const cand=nextsOf(prev, lv); if(!cand.length) return null;
+  const need = lv===1 ? 3 : lv===2 ? 1 : 0;
+  const tryPick = list => { if(!list.length) return null; const w=pick(list); return w; };
+  const scored = cand.filter(w=>{ S.chain.used.add(w); const n=nextsOf(w,lv).length; S.chain.used.delete(w); return n>=need; });
+  return tryPick(lv===1 ? (scored.filter(w=>CEMO[w]).length ? scored.filter(w=>CEMO[w]) : scored) : scored) || (lv>=3 ? tryPick(cand) : tryPick(cand));
+}
+GEN.chain=(lv,kid)=>{
+  const st=$('#stage'), r={}; r.ans='__chain__';
+  if(!S.chain) chainStart(lv);
+  const ch=S.chain, cur=ch.words[ch.words.length-1], starts=startsOf(cur), ml=minLenOf(lv);
+  const pool=nextsOf(cur, lv);
+  const need = starts.map(x=>`'${x}'`).join(' 또는 ');
+  const hist = ch.words.slice(-5).map(w=>`<span>${w}</span>`).join(' → ');
+  $('#prompt').innerHTML=`<div class="chainhist">${ch.words.length>5?'… → ':''}${hist}</div><span class="tgt">${CEMO[cur]||''} ${cur.slice(0,-1)}<u>${lastSyl(cur)}</u></span><span class="ko">${need}${starts.length>1?'(으)로':ro(lastSyl(cur)).slice(1)} 시작하는 말!${ml>=3?' (세 글자 이상)':''}${S.voice?' · 🎤 말해 봐요':' · 🎤 말로 대답하기를 켜면 말로 해요'}</span>`;
+  const hintBox=mk('div','hintbox'); hintBox.id='hints';
+  const tools=mk('div','chaintools');
+  const hintBtn=mk('button','pill','💡 힌트'); tools.appendChild(hintBtn);
+  const bar=mk('div','timebar','<i></i>'); if(lv>=3) tools.appendChild(bar);
+  st.append(hintBox, tools);
+  let hinted=false;
+  const showHints=async(speak=true)=>{
+    if(hinted || r.rid!==S.rid) return; hinted=true; S.wrong=Math.max(S.wrong,1); hintBtn.style.display='none';
+    const contOk = w=>{ ch.used.add(w); const n=nextsOf(w,lv).length; ch.used.delete(w); return n>0; };
+    let pref = pool.filter(contOk); if(lv===1 && pref.filter(w=>CEMO[w]).length>=3) pref=pref.filter(w=>CEMO[w]);
+    const hs = shuffle(pref.length>=3?pref:pool).slice(0,3);
+    hs.forEach(w=>{ const b=mk('button','txtbtn hintw',`${CEMO[w]||''} ${w}`); b.dataset.v=w; b.onclick=()=>r.tryWords([w],b); hintBox.appendChild(b); });
+    if(speak){ hush(); await say(`힌트! ${hs.join(', ')}. 하나 골라서 말하거나 눌러 봐!`); }
+  };
+  hintBtn.onclick=()=>{ if(!S.busy) showHints(); };
+  // 이을 말이 사전에 없으면 새로 시작
+  if(!pool.length){
+    hintBtn.style.display='none';
+    r.speak=async()=>{ const rid=r.rid; await say(`${ro(lastSyl(cur))} 시작하는 말은 정말 어렵다! 새로 시작하자!`); if(rid!==S.rid) return; S.chain=null; round(); };
+    r.voice=null; return r;
+  }
+  r.wrongSay=null;
+  r.tryWords=async(list, el)=>{
+    if(S.busy || r.rid!==S.rid) return;
+    const cands=[...new Set(list.map(cleanWord).filter(Boolean))].sort((a,b)=>(CW.includes(b)?1:0)-(CW.includes(a)?1:0));
+    const ok=cands.find(w=>starts.includes(w[0]) && w.length>=ml && w.length<=7 && !ch.used.has(w));
+    hush();
+    if(ok){
+      S.busy=true; sDing(); if(el) el.classList.add('right');
+      ch.words.push(ok); ch.used.add(ok); ch.fresh=false;
+      return success(r, el);
+    }
+    S.wrong++; sBoop(); if(el) shake(el);
+    const w=cands[0];
+    let msg;
+    if(!w) msg='잘 못 들었어. 다시 말해 줄래?';
+    else if(ch.used.has(w)) msg=`${w}! 그건 벌써 나왔어. 다른 말!`;
+    else if(!starts.includes(w[0])) msg=`${w}? ${ro(starts[0])} 시작해야 해!`;
+    else if(w.length<ml) msg=`${w}! 세 글자 이상인 말로 해 볼까?`;
+    else msg='다시 말해 볼까?';
+    await say(msg);
+    if(r.rid!==S.rid) return;
+    if(S.wrong >= (lv===1?1:2)) showHints();
+  };
+  r.onRight=async()=>{
+    const w=ch.words[ch.words.length-1];
+    await say(`${w}! 좋아!`);
+    if(S.mode==='solo'){
+      const cw=computerWord(w, lv);
+      if(!cw){
+        await overlay(`🏆 ${kid} 승리!<br><small style="font-size:.5em">${ro(lastSyl(w))} 시작하는 말을 못 찾겠어</small>`, `음… ${ro(lastSyl(w))} 시작하는 말… 모르겠다! ${kid} 승리! 별 3개 보너스!`);
+        addPts(kid,3); S.chain=null;
+      } else {
+        ch.words.push(cw); ch.used.add(cw);
+        await say(pick(['그럼 나는…','음, 나는…','좋아, 내 차례!'])); await say(`${cw}!`);
+      }
+    }
+  };
+  r.speak=async()=>{
+    const rid=r.rid;
+    if(ch.fresh && ch.words.length===1) await say(S.mode==='duo' ? `끝말잇기 시작! 첫 단어는 ${cur}!` : `끝말잇기 시작! 내가 먼저 할게. ${cur}!`);
+    else if(S.mode==='duo') await say(`${cur}!`);
+    if(rid!==S.rid) return;
+    await say(`${ro(starts[0])} 시작하는 말!`);
+    if(rid!==S.rid) return;
+    if(!S.voice || !SR){ showHints(false); return; }
+    if(lv>=3){ const t0=Date.now(), T=20000; const iv=setInterval(()=>{
+        if(rid!==S.rid || S.busy){ clearInterval(iv); return; }
+        const p=Math.min(1,(Date.now()-t0)/T); bar.firstChild.style.width=(100-p*100)+'%';
+        if(p>=1){ clearInterval(iv); if(!hinted){ say('시간 끝! 힌트를 줄게.').then(()=>showHints(false)); } } },200); }
+    $('#mic').onclick();      // 바로 듣기 시작
+  };
+  r.voice={lang:'ko-KR', handle:t=>r.tryWords(t,null)};
+  return r;
+};
+
 // ================= 같이 하기 결과 =================
 async function showResult(){
   const rid=++S.rid; S.busy=true; hush();
@@ -818,7 +952,7 @@ async function showResult(){
   if(S.duo.cheers>0){ await say(`응원도 ${S.duo.cheers}번이나 했어요. 친구를 응원해 줘서 고마워!`); if(!alive()) return; }
   await say('마지막으로 하이파이브! 짝!'); sClap(); setTimeout(sClap,120);
 }
-$('#again').onclick=()=>{ audio(); S.rid++; S.score={민지:0,민국:0}; S.hearts={민지:0,민국:0}; S.duo={turns:0,max:10,cheers:0}; S.kid=other(S.kid); show('game'); round(true); };
+$('#again').onclick=()=>{ audio(); S.rid++; S.score={민지:0,민국:0}; S.hearts={민지:0,민국:0}; S.duo={turns:0,max:10,cheers:0}; S.chain=null; S.kid=other(S.kid); show('game'); round(true); };
 $('#resMenu').onclick=()=>{ S.score={민지:0,민국:0}; S.hearts={민지:0,민국:0}; openMenu(false); };
 
 // 응원 (같이 하기): 화면 버튼 또는 스페이스바
