@@ -31,9 +31,9 @@
   .pills{display:flex;gap:1vw;align-items:center;font-size:clamp(14px,1.6vw,26px);flex-wrap:wrap;justify-content:center}
   .pill{font-size:inherit;padding:.6vh 1.4vw;border-radius:99px;background:#fff;color:#555;box-shadow:0 2px 0 rgba(0,0,0,.1)}
   .pill.sel{background:#3b3b58;color:#fff}
-  .card{width:20.5vw;padding:2vh 1vw;display:flex;flex-direction:column;align-items:center;gap:1.2vh}
-  .card .em{font-size:clamp(44px,6vw,110px);line-height:1}
-  .big.card{font-size:clamp(18px,2.5vw,46px);white-space:nowrap}
+  .card{width:17vw;padding:1.8vh .8vw;display:flex;flex-direction:column;align-items:center;gap:1.2vh}
+  .card .em{font-size:clamp(40px,5.2vw,100px);line-height:1}
+  .big.card{font-size:clamp(16px,2.2vw,42px);white-space:nowrap}
   .card small{font-size:.45em}
   .topbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:2vh 2vw;z-index:5;gap:1vw}
   .icon{font-size:clamp(24px,3vw,50px);background:#fff;border-radius:50%;width:clamp(48px,5.5vw,96px);height:clamp(48px,5.5vw,96px);box-shadow:0 .4vw 0 rgba(0,0,0,.12);flex:none}
@@ -269,6 +269,30 @@
     #ccScore .chip{font-size:3.4vw;padding:.3vh 2vw}
     #ccEndBox{right:0;left:0;top:auto;bottom:3vh;flex-direction:row;justify-content:center}
   }
+
+  /* 진실의 마이크 */
+  .tmbtn{background:linear-gradient(135deg,#74c0fc,#b197fc)}
+  #tmscreen{background:linear-gradient(180deg,#e7f5ff,#f3f0ff)}
+  #tmBody{display:flex;flex-direction:column;align-items:center;gap:2.4vh;max-width:90vw;max-height:84vh;overflow:auto;padding:1vh 2vw}
+  .tmbig{font-size:clamp(70px,10vw,180px)}
+  .tmwho{font-size:clamp(28px,4.2vw,76px)}
+  .tmrule{font-size:clamp(17px,2.2vw,38px);background:#fff;border-radius:2vw;padding:1.4vh 2.4vw;text-align:center;line-height:1.6}
+  #tmBody .tmfaces .av{font-size:clamp(70px,9vw,160px)}
+  #tmText{width:min(80vw,1100px);height:22vh;font-family:inherit;font-size:clamp(18px,2.4vw,40px);border-radius:2vw;border:.4vh solid #d0bfff;padding:1.4vh 1.6vw;resize:none}
+  #tmMic.listening{animation:pulse .8s infinite alternate;background:#ff2d6f}
+  .tmcols{display:flex;gap:2vw;width:min(86vw,1300px)}
+  .tmcol{flex:1;background:#fff;border-radius:2vw;border-top:1vh solid var(--k);padding:1.4vh 1.6vw;font-size:clamp(15px,1.9vw,32px)}
+  .tmcol p{margin:.8vh 0 0}
+  .tmsame,.tmdiff{font-size:clamp(15px,1.9vw,32px);text-align:center}
+  .tmchip{display:inline-block;background:#fff;border-radius:99px;padding:.2vh 1vw;margin:.3vh .3vw}
+  .big.tmfeel{background:#fff;color:#3b3b58;font-size:clamp(40px,5vw,90px);line-height:1.1;padding:1.6vh 1.6vw}
+  .tmfeel small{font-size:.32em}
+  @media (orientation: portrait){
+    .tmcols{flex-direction:column}
+    #tmText{height:20vh;font-size:4.6vw}
+    .tmrule{font-size:4.2vw}
+    .big.tmfeel{font-size:10vw}
+  }
   /* 마음 놀이 */
   .scene{font-size:clamp(70px,11vw,200px);line-height:1}
   .opts{display:flex;flex-direction:column;gap:1.8vh;width:min(80vw,1200px)}
@@ -330,8 +354,11 @@
     .pills{font-size:3.8vw;gap:2vw;padding:0 3vw}
     .pill{padding:.8vh 3vw}
     .note{font-size:3.2vw}
-    .card{width:42vw;padding:2.5vh 2vw}
-    .big.card{font-size:6vw}
+    .card{width:29vw;padding:1.6vh 1vw}
+    .big.card{font-size:4.2vw;border-radius:4vw}
+    .card .em{font-size:10vw}
+    .card small{font-size:.55em;white-space:normal}
+    #menu{justify-content:flex-start;padding-top:11vh;overflow:auto}
     .card .em{font-size:15vw}
     .icon{width:12vw;height:12vw;font-size:6vw}
     .chip{font-size:4vw;padding:.4vh 2.5vw}
@@ -418,7 +445,7 @@
     <button class="pill" id="voiceToggle">꺼짐</button>
   </div>
   <div class="note" id="voiceNote"></div>
-  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v10</div>
+  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v11</div>
 </section>
 
 <!-- 놀이 고르기 -->
@@ -434,6 +461,7 @@
     <button class="big ffbtn card" data-game="firefly"><span class="em">🧚</span>반디요정<small data-lv="firefly"></small></button>
     <button class="big mcbtn card" data-game="mouse"><span class="em">🐭</span>생쥐만세<small>2~4명 같이</small></button>
     <button class="big ccbtn card" data-game="chicken"><span class="em">🐔</span>치킨차차<small>2~4명 같이</small></button>
+    <button class="big tmbtn card" data-game="truth"><span class="em">🔍</span>진실의 마이크<small>다퉜을 때 화해</small></button>
   </div>
   <div class="sub" id="menuSub"></div>
 </section>
@@ -513,6 +541,12 @@
   <div id="ccMsg"></div>
   <div id="ccBoard"></div>
   <div id="ccEndBox"><button class="big green small" id="ccAgain">🔁 한 판 더</button><button class="big blue small" id="ccMenuB">🎲 다른 놀이</button></div>
+</section>
+
+<!-- 진실의 마이크 -->
+<section id="tmscreen" class="screen">
+  <div class="topbar"><button class="icon" id="tmHome" title="놀이 고르기">🏠</button></div>
+  <div id="tmBody"></div>
 </section>
 
 <!-- 같이 하기 결과 -->
@@ -756,6 +790,7 @@ document.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>{
   if(S.game==='firefly') return startFirefly();
   if(S.game==='mouse') return mcSetupScreen();
   if(S.game==='chicken') return ccSetupScreen();
+  if(S.game==='truth') return tmStart();
   show('game'); $('#cheerTip').style.display = 'none'; $('#cheerBtn').style.display = S.mode==='duo' ? 'block' : 'none'; if(S.mode==='duo') showCheerTip();
   round(true);
 });
@@ -1729,6 +1764,152 @@ async function ccEnd(rid, wi){
   $('#ccMenuB').onclick=()=>openMenu(false);
 })();
 
+
+// ================= 9. 진실의 마이크 (다툼 화해 놀이) =================
+// 목소리만으로 거짓말을 알아내는 기술은 없어요. 그래서 이 놀이는 누가 거짓말했는지 판정하지 않고,
+// 둘의 이야기를 똑같이 들어 주고 → 같은 점/다른 점을 보여 주고 → 솔직하게 고쳐 말할 기회를 주고(용기 별) → 화해로 끝내요.
+let T=null;
+const TM_STOP = ['그리고','그래서','근데','그런데','그냥','내가','제가','나는','나','저','너가','네가','너','진짜','막','아니','그','이거','저거','그거','했어','했는데','있잖아','엄마','아빠','먼저','계속','완전','왜'];
+const TM_PART = ['에게서','한테서','이랑','에게','한테','에서','으로','하고','부터','까지','은','는','이','가','을','를','에','도','랑','의','로','요'];
+function tmWords(txt){
+  const out=new Set();
+  String(txt).replace(/[^가-힣a-zA-Z0-9\s]/g,' ').split(/\s+/).forEach(w=>{
+    if(!w) return; for(const p of TM_PART){ if(w.length>p.length+1 && w.endsWith(p)){ w=w.slice(0,-p.length); break; } }
+    if(w.length>=2 && !TM_STOP.includes(w)) out.add(w);
+  });
+  return out;
+}
+function tmStart(){
+  hush(); S.rid++; S.game='truth'; S.mode='duo';
+  T={step:0, story:{민지:'',민국:''}, fixed:{민지:false,민국:false}, feel:{}, order:shuffle(['민지','민국'])};
+  show('tmscreen'); tmStep(S.rid);
+}
+const tmBox = h => $('#tmBody').innerHTML=h;
+const tmAlive = rid => rid===S.rid;
+let tmRec=null;
+// 길게 듣기: 말하는 동안 계속 받아 적고, '다 말했어요'를 누르면 끝
+function tmListen(kid, onDone){
+  const area=$('#tmText');
+  if(!(S.voice && SR)){ area.removeAttribute('readonly'); area.placeholder='(마이크가 꺼져 있어요) 엄마·아빠가 대신 적어 주세요'; return; }
+  try{
+    hush(); const r=new SR(); tmRec=r; r.lang='ko-KR'; r.continuous=true; r.interimResults=true;
+    let final=area.value ? area.value+' ' : '';
+    r.onresult=e=>{ let interim=''; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) final+=t+' '; else interim+=t; } area.value=(final+interim).trim(); };
+    r.onerror=e=>{ if(e.error==='not-allowed'||e.error==='service-not-allowed'||e.error==='audio-capture'){ voiceBlocked(e.error); area.removeAttribute('readonly'); } };
+    r.onend=()=>{ $('#tmMic').classList.remove('listening'); tmRec=null; };
+    r.start(); $('#tmMic').classList.add('listening');
+  }catch(e){ area.removeAttribute('readonly'); }
+}
+function tmStopListen(){ try{ tmRec && tmRec.stop(); }catch(e){} tmRec=null; }
+async function tmTell(rid, kid, again){
+  const other_=other(kid);
+  tmBox(`<div class="tmwho">${KFACE[kid]} <b>${kid}</b>${again?'의 다시 말하기':' 이야기'}</div>
+    <div class="tmrule">${again?'바꾸거나 더하고 싶은 말을 해요':`말하는 동안 ${nameI(other_)}는 끝까지 들어 주기 🤫`}</div>
+    <textarea id="tmText" readonly placeholder="🎤 버튼을 누르고 말해요">${again?T.story[kid]:''}</textarea>
+    <div class="row"><button class="big pink small" id="tmMic">🎤 말하기</button><button class="big green small" id="tmDone">✅ 다 말했어요</button></div>`);
+  await say(again ? `${call(kid)}, 바꾸거나 더하고 싶은 말을 해 줘.` : `${call(kid)}, 무슨 일이 있었는지 말해 줄래? 마이크 버튼을 누르고 천천히 말해 줘. ${call(other_)}, 끝까지 들어 주기!`);
+  if(!tmAlive(rid)) return;
+  return new Promise(res=>{
+    $('#tmMic').onclick=()=>{ audio(); tone(660,990,.12,'sine',.15); tmListen(kid); };
+    $('#tmDone').onclick=()=>{ tmStopListen(); const v=$('#tmText').value.trim(); if(!v){ say('아직 들은 이야기가 없어. 마이크를 누르고 말해 줘!'); return; } T.story[kid]=v; sDing(); res(); };
+  });
+}
+async function tmStep(rid){
+  if(!tmAlive(rid)) return;
+  const [a,b]=T.order;
+  // 1. 시작
+  tmBox(`<div class="tmbig">🔍</div><div class="tmwho">진실의 마이크</div>
+    <div class="tmrule">둘 다 속상했구나. 한 명씩 이야기를 들어 볼게요.<br>약속: ① 솔직하게 말하기 ② 친구 말 끊지 않기 ③ 끝까지 듣기</div>
+    <div class="row tmfaces">${KFACE.민지}${KFACE.민국}</div>`);
+  await say('민지야, 민국아. 둘 다 속상했구나. 진실의 마이크가 한 명씩 이야기를 들어 볼게. 약속! 솔직하게 말하기, 친구 말 끊지 않기, 끝까지 듣기.'); if(!tmAlive(rid)) return;
+  await say(`먼저 ${nameI(a)}부터!`); if(!tmAlive(rid)) return;
+  // 2. 각자 이야기
+  await tmTell(rid,a); if(!tmAlive(rid)) return;
+  await say(`고마워, ${call(a)}. 이제 ${nameI(b)} 차례!`); if(!tmAlive(rid)) return;
+  await tmTell(rid,b); if(!tmAlive(rid)) return;
+  // 3. 같은 점 / 다른 점
+  await tmCompare(rid); if(!tmAlive(rid)) return;
+  // 4. 솔직하게 고칠 기회
+  for(const k of [a,b]){ await tmFixChance(rid,k); if(!tmAlive(rid)) return; }
+  // 5. 마음 고르기
+  for(const k of [a,b]){ await tmFeel(rid,k); if(!tmAlive(rid)) return; }
+  // 6. 결론과 화해
+  await tmMakeUp(rid);
+}
+async function tmCompare(rid){
+  const wa=tmWords(T.story.민지), wb=tmWords(T.story.민국);
+  const same=[...wa].filter(w=>wb.has(w)), onlyA=[...wa].filter(w=>!wb.has(w)).slice(0,8), onlyB=[...wb].filter(w=>!wa.has(w)).slice(0,8);
+  const chip=w=>`<span class="tmchip">${w}</span>`;
+  tmBox(`<div class="tmwho">📝 둘의 이야기</div>
+    <div class="tmcols">
+      <div class="tmcol" style="--k:${KCOL.민지}"><b>${KFACE.민지} 민지</b><p>${T.story.민지}</p></div>
+      <div class="tmcol" style="--k:${KCOL.민국}"><b>${KFACE.민국} 민국</b><p>${T.story.민국}</p></div>
+    </div>
+    <div class="tmsame">🤝 둘 다 말한 것: ${same.length?same.slice(0,8).map(chip).join(''):'<i>아직 없어요</i>'}</div>
+    <div class="tmdiff">🔀 다르게 말한 것: 민지 ${onlyA.map(chip).join('')||'-'} / 민국 ${onlyB.map(chip).join('')||'-'}</div>
+    <div class="row"><button class="big blue small" id="tmNext">다음 ▶</button></div>`);
+  await say(`민지는 이렇게 말했어. ${T.story.민지}`, 'ko-KR', 30000); if(!tmAlive(rid)) return;
+  await say(`민국이는 이렇게 말했어. ${T.story.민국}`, 'ko-KR', 30000); if(!tmAlive(rid)) return;
+  await say(same.length ? `둘 다 ${same.slice(0,3).join(', ')} 이야기를 했네. 그런데 다르게 말한 부분도 있어.` : '둘의 이야기가 많이 다르네.'); if(!tmAlive(rid)) return;
+  await say('진실의 마이크는 마음속까지는 볼 수 없어. 그래서 누가 맞는지 정하지 않을 거야. 대신 둘에게 솔직해질 기회를 줄게.'); if(!tmAlive(rid)) return;
+  await new Promise(res=>{ $('#tmNext').onclick=res; });
+}
+async function tmFixChance(rid, kid){
+  tmBox(`<div class="tmwho">${KFACE[kid]} ${kid}</div>
+    <div class="tmrule">혹시 바꾸거나 더하고 싶은 말이 있나요?<br>솔직하게 고쳐 말하면 <b>🦁 용기 별</b>을 받아요. 혼나지 않아요!</div>
+    <div class="row"><button class="big orange small" id="tmFix">🎤 고쳐 말할래요</button><button class="big green small" id="tmKeep">👍 그대로예요</button></div>`);
+  await say(`${call(kid)}, 혹시 바꾸거나 더하고 싶은 말이 있어? 솔직하게 고쳐 말하면 용기 별을 줄게. 혼나지 않아. 그대로면 그대로라고 눌러 줘.`); if(!tmAlive(rid)) return;
+  const choice=await new Promise(res=>{ $('#tmFix').onclick=()=>res('fix'); $('#tmKeep').onclick=()=>res('keep'); });
+  if(choice==='fix'){
+    const before=T.story[kid];
+    await tmTell(rid,kid,true); if(!tmAlive(rid)) return;
+    if(T.story[kid]!==before){ T.fixed[kid]=true; P[kid].stars+=3; save(); await overlay(`🦁 용기 별!<br>${KFACE[kid]} ${kid}`, `${call(kid)}, 솔직하게 말해 줘서 정말 고마워. 다시 말하는 건 큰 용기야! 용기 별 세 개!`); }
+  } else { await say(`알겠어, ${call(kid)}. 이야기해 줘서 고마워.`); }
+}
+const TM_FEEL=[['😢','속상해요'],['😠','화나요'],['😔','미안해요'],['😳','억울해요'],['🙂','이제 괜찮아요']];
+async function tmFeel(rid, kid){
+  tmBox(`<div class="tmwho">${KFACE[kid]} ${kid}의 지금 마음은?</div>
+    <div class="row tmfeels">${TM_FEEL.map(([e,t],i)=>`<button class="big tmfeel" data-i="${i}">${e}<br><small>${t}</small></button>`).join('')}</div>`);
+  await say(`${call(kid)}, 지금 마음은 어때? 얼굴을 골라 줘.`); if(!tmAlive(rid)) return;
+  const i=await new Promise(res=>document.querySelectorAll('.tmfeel').forEach(b=>b.onclick=()=>res(+b.dataset.i)));
+  T.feel[kid]=i; sPop();
+  await say(`${call(kid)}는 ${TM_FEEL[i][1].replace('요','구나').replace('해구나','했구나').replace('워구나','웠구나')}. 말해 줘서 고마워.`.replace('는 이제 괜찮아구나','는 이제 괜찮구나'));
+}
+async function tmMakeUp(rid){
+  const ka='민지', kb='민국';
+  tmBox(`<div class="tmwho">🌈 오늘의 결론</div>
+    <div class="tmrule" style="text-align:left">
+      • 진실의 마이크는 누가 틀렸는지 정하지 않아요. 다른 부분은 엄마·아빠와 차분히 확인해요.<br>
+      • 둘 다 자기 이야기를 끝까지 말했고, 친구 이야기도 들어 줬어요. 👏<br>
+      ${T.fixed.민지||T.fixed.민국 ? `• ${['민지','민국'].filter(k=>T.fixed[k]).join(', ')}: 솔직하게 고쳐 말한 🦁 용기!<br>` : ''}
+      • 싸워도 우리는 가족! 미안해 · 괜찮아 · 사랑해 💕
+    </div>
+    <div class="row" id="tmMk">
+      <button class="big pink small" data-k="${ka}" data-w="미안">${KFACE[ka]} "미안해" 했어요</button>
+      <button class="big blue small" data-k="${kb}" data-w="미안">${KFACE[kb]} "미안해" 했어요</button>
+      <button class="big green small" data-k="둘" data-w="안아">🤗 꼭 안아 줬어요</button>
+    </div>
+    <div class="row"><button class="big orange small" id="tmEnd">🏠 놀이터로</button></div>`);
+  const mark=b=>{ if(b.disabled) return; b.disabled=true; b.style.opacity=.5; sDing(); floatUp('💖'); if(P[b.dataset.k]) P[b.dataset.k].hearts+=1; else { P.민지.hearts++; P.민국.hearts++; } save(); };
+  document.querySelectorAll('#tmMk button').forEach(b=>b.onclick=()=>mark(b));
+  $('#tmEnd').onclick=()=>{ tmStopListen(); openMenu(false); };
+  await say('오늘의 결론! 진실의 마이크는 누가 틀렸는지 정하지 않아. 이야기가 다른 부분은 엄마 아빠랑 차분히 이야기해 보자.'); if(!tmAlive(rid)) return;
+  await say('민지도 민국이도 자기 이야기를 끝까지 말했고, 서로의 이야기도 들어 줬어. 정말 멋져!'); if(!tmAlive(rid)) return;
+  if(T.fixed.민지||T.fixed.민국){ await say('그리고 솔직하게 고쳐 말한 용기, 그게 진짜 멋진 거야.'); if(!tmAlive(rid)) return; }
+  await say('잘못한 게 있으면 미안해 하고, 사과를 받으면 괜찮아 하고 말해 주는 거야. 싸워도 우리는 가족이니까.'); if(!tmAlive(rid)) return;
+  for(const [k,o] of [[ka,kb],[kb,ka]]){
+    await say(`${call(k)}, ${toK(o)} 미안해 하고 말해 줄래?`); if(!tmAlive(rid)) return;
+    const t=await listen('ko-KR',5000); if(!tmAlive(rid)) return;
+    const btn=document.querySelector(`#tmMk button[data-k="${k}"]`);
+    if(t.some(x=>x.includes('미안'))) mark(btn);
+    await say(`${call(o)}, 괜찮아! 하고 말해 줘.`); if(!tmAlive(rid)) return;
+    await listen('ko-KR',4000); if(!tmAlive(rid)) return;
+  }
+  await say('이제 둘이 꼭 안아 주자! 하나, 둘, 셋! 꼬옥!'); if(!tmAlive(rid)) return;
+  sFan(); await wait(1500); if(!tmAlive(rid)) return;
+  await say('민지야, 민국아, 화해해 줘서 고마워. 사랑해!'); sClap(); setTimeout(sClap,120);
+}
+
 // ================= 같이 하기 결과 =================
 async function showResult(){
   const rid=++S.rid; S.busy=true; hush();
@@ -1825,6 +2006,7 @@ const _round=round;
 round = async function(first){ $('#prompt').style.top=''; $('#stage').style.top=''; return _round(first); };
 
 updHome(); updVoiceUI();
+$('#tmHome').onclick=()=>{ tmStopListen(); openMenu(false); };
 // 첫 화면: 글자 통통 + 얼굴 + 이름 불러 주기
 (function(){
   const t='민지 민국 놀이터', cols=['#ff5c8a','#ff8a3d','#f5b700','#40c070','#3d8bfd','#9b5de5'];
