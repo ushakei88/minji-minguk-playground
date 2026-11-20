@@ -95,6 +95,50 @@
   .timebar i{display:block;height:100%;width:100%;background:#ff8fb8;transition:width .2s linear}
   .txtbtn.hintw{letter-spacing:0}
 
+
+  /* 첫 화면 */
+  #title{cursor:pointer;gap:4vh;background:radial-gradient(ellipse at 50% 40%,#fff 0%,rgba(255,255,255,0) 60%)}
+  .bigtitle{font-size:clamp(54px,10vw,190px);margin:0;letter-spacing:.02em;text-shadow:0 .6vw 0 #fff,0 1.1vw 0 rgba(0,0,0,.1)}
+  .bigtitle span{display:inline-block;animation:hop 1.6s ease-in-out infinite}
+  .bigtitle .tw{animation:none;white-space:nowrap}
+  .bigtitle .sp{animation:none}
+  .bigtitle .brk{display:none}
+  .bigtitle .sp{width:.35em}
+  @keyframes hop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-3.5vh) rotate(-4deg)}}
+  .titlekids{display:flex;gap:8vw}
+  .tk{display:flex;flex-direction:column;align-items:center;gap:1vh;font-size:clamp(30px,4.5vw,84px)}
+  .tface{font-size:clamp(100px,17vw,320px);line-height:1;animation:sway 2.4s ease-in-out infinite alternate;filter:drop-shadow(0 1vh 1vh rgba(0,0,0,.15))}
+  .tk:nth-child(2) .tface{animation-delay:-1.2s}
+  .tface.jump{animation:bigjump .7s ease-out}
+  @keyframes sway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+  @keyframes bigjump{40%{transform:translateY(-8vh) scale(1.1)}}
+  .tapme{font-size:clamp(22px,3vw,54px);background:#fff;border-radius:99px;padding:1.2vh 3vw;box-shadow:0 .6vw 0 rgba(0,0,0,.1);animation:pulse2 1.2s ease-in-out infinite alternate}
+  @keyframes pulse2{to{transform:scale(1.08)}}
+  .sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .sparkles i{position:absolute;font-style:normal;font-size:clamp(18px,2.4vw,44px);opacity:.0;animation:twinkle 3.2s ease-in-out infinite}
+  @keyframes twinkle{50%{opacity:.85;transform:scale(1.2)}}
+  /* 얼굴 아바타 */
+  .av{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.22em;line-height:0}
+  .av svg{width:100%;height:100%;display:block;border-radius:50%}
+  .kid .face .av{width:1em;height:1em;vertical-align:0}
+  .duoBtn .face .av{margin:0 .05em}
+  .rescol .face .av{width:1em;height:1em}
+  .menusub{font-size:.55em;opacity:.7}
+  .mouse.kidm{padding:.12vh;font-size:min(3vh,2.2vw)}
+  .mcsp .mouse.kidm{font-size:min(2.4vh,1.8vw)}
+  .mouse.kidm .av{width:1em;height:1em;vertical-align:0}
+  .cchen .hbadge{position:absolute;right:-18%;top:-22%;font-size:.55em}
+  .cchen .hbadge .av{width:1em;height:1em;box-shadow:0 0 0 .25vh var(--k);border-radius:50%}
+  .duoBtn{width:52vw;flex-direction:row!important;justify-content:center;gap:2vw}
+  .duoBtn .face{font-size:clamp(44px,6vw,110px)!important}
+  @media (orientation: portrait){
+    .bigtitle{font-size:15vw;line-height:1.2;text-align:center}
+    .bigtitle .brk{display:block!important;height:0;animation:none}
+    .tface{font-size:34vw}
+    .tk{font-size:8vw}
+    .tapme{font-size:6vw}
+    .mouse.kidm{font-size:3vw} .mcsp .mouse.kidm{font-size:2.6vw}
+  }
   /* 반디요정 */
   .ffbtn{background:linear-gradient(135deg,#2b2f5a,#5f3dc4)}
   #ffscreen{background:radial-gradient(ellipse at 50% 30%,#3b3f7a 0%,#1a1c3d 70%);color:#fff}
@@ -120,7 +164,7 @@
   #ffDice.toss{animation:toss 1.35s ease-out}
   @keyframes toss{0%{transform:translateY(0) scale(1)}25%{transform:translateY(-16vh) scale(1.15)}55%{transform:translateY(0) scale(1)}70%{transform:translateY(-5vh)}85%{transform:translateY(0)}92%{transform:translateY(-1.5vh)}100%{transform:translateY(0)}}
   .cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 1.35s cubic-bezier(.15,.75,.3,1)}
-  .face{position:absolute;inset:0;background:#fffdf5;border-radius:18%;border:.3vh solid #e9e1c8;box-shadow:inset 0 0 2vh rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;backface-visibility:hidden}
+  .cube .face{position:absolute;inset:0;background:#fffdf5;border-radius:18%;border:.3vh solid #e9e1c8;box-shadow:inset 0 0 2vh rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;backface-visibility:hidden}
   .pips{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);width:72%;height:72%}
   .pips i{border-radius:50%;margin:18%}
   .pips i.on{background:#e03131;box-shadow:inset 0 -.4vh 0 rgba(0,0,0,.25)}
@@ -344,15 +388,27 @@
 
 
 <!-- 처음 화면 -->
-<section id="home" class="screen on">
+<section id="title" class="screen on">
+  <div class="sparkles"></div>
+  <h1 class="bigtitle" id="bigTitle"></h1>
+  <div class="titlekids">
+    <div class="tk"><span class="tface" id="tfMinji"></span><b style="color:#ff5c8a">민지</b></div>
+    <div class="tk"><span class="tface" id="tfMinguk"></span><b style="color:#3d8bfd">민국</b></div>
+  </div>
+  <div class="tapme">👆 화면을 눌러 주세요!</div>
+</section>
+
+<section id="home" class="screen">
   <button id="gear" class="icon" title="부모님 설정">⚙️</button>
   <button id="fs" class="icon" title="TV 전체 화면">⛶</button>
   <h1>민지 민국 놀이터</h1>
-  <div class="sub">누가 놀까요?</div>
+  <div class="sub">누가 놀까요? 얼굴을 눌러 주세요!</div>
   <div class="row">
-    <button class="big pink kid" data-kid="민지"><span class="face">👧</span>민지<small id="homeInfo민지"></small></button>
-    <button class="big blue kid" data-kid="민국"><span class="face">👦</span>민국<small id="homeInfo민국"></small></button>
-    <button class="big duoBtn kid" id="duoStart"><span class="face">👧👦</span>같이 하기<small>차례대로 번갈아</small></button>
+    <button class="big pink kid" data-kid="민지"><span class="face" data-av="민지"></span>민지<small id="homeInfo민지"></small></button>
+    <button class="big blue kid" data-kid="민국"><span class="face" data-av="민국"></span>민국<small id="homeInfo민국"></small></button>
+  </div>
+  <div class="row">
+    <button class="big duoBtn kid" id="duoStart"><span class="face"><span data-av="민지"></span><span data-av="민국"></span></span>같이 하기<small>차례대로 번갈아</small></button>
   </div>
   <div class="pills">놀이 시간:
     <button class="pill" data-min="10">10분</button>
@@ -362,7 +418,7 @@
     <button class="pill" id="voiceToggle">꺼짐</button>
   </div>
   <div class="note" id="voiceNote"></div>
-  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v9</div>
+  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v10</div>
 </section>
 
 <!-- 놀이 고르기 -->
@@ -530,9 +586,16 @@ const toK   = k => j(k,'이에게','에게');    // 민지에게 / 민국이에�
 const nameI = k => j(k,'이',''); // 민지 / 민국이
 const other = k => k==='민지' ? '민국' : '민지';
 
+
+// ================= 민지·민국 얼굴 (사진을 참고해 그린 캐릭터) =================
+const AV = {
+  민지:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="49" fill="#ffd6e7"/><path d="M17 56 Q14 16 50 13 Q86 16 83 56 L85 84 Q72 92 66 78 L34 78 Q28 92 15 84 Z" fill="#221b1b"/><rect x="43" y="74" width="14" height="10" fill="#f7d2b8"/><ellipse cx="50" cy="53" rx="25" ry="27" fill="#ffe2cc"/><path d="M24 48 Q26 20 54 20 Q76 22 77 46 Q70 32 56 30 Q44 33 38 40 Q31 44 24 48Z" fill="#221b1b"/><path d="M36 54 Q41 49 46 54" stroke="#2b2b2b" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M54 54 Q59 49 64 54" stroke="#2b2b2b" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="34" cy="62" rx="5" ry="3" fill="#ff9fb4" opacity=".7"/><ellipse cx="66" cy="62" rx="5" ry="3" fill="#ff9fb4" opacity=".7"/><path d="M41 64 Q50 73 59 64 Q50 68 41 64Z" fill="#d9485f"/><path d="M26 100 Q26 82 50 80 Q74 82 74 100Z" fill="#2c3e66"/><path d="M42 80 L50 90 L58 80" stroke="#c9d6ff" stroke-width="1.6" fill="none"/><circle cx="50" cy="91" r="1.8" fill="#e8e8e8"/></svg>`,
+  민국:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="49" fill="#d6ecff"/><rect x="43" y="74" width="14" height="10" fill="#f7d2b8"/><ellipse cx="50" cy="54" rx="25" ry="26" fill="#ffe2cc"/><path d="M22 52 Q19 15 50 15 Q81 15 78 52 Q76 44 73 42 Q66 33 50 34 Q34 33 27 42 Q24 44 22 52Z" fill="#221b1b"/><path d="M27 44 Q29 27 50 26 Q71 27 73 44 Q66 40 58 41 L50 39 L42 41 Q34 40 27 44Z" fill="#221b1b"/><circle cx="40" cy="55" r="8.5" fill="#ffffff" fill-opacity=".25" stroke="#151515" stroke-width="2.8"/><circle cx="60" cy="55" r="8.5" fill="#ffffff" fill-opacity=".25" stroke="#151515" stroke-width="2.8"/><path d="M48.5 54 Q50 52.5 51.5 54" stroke="#151515" stroke-width="2.4" fill="none"/><circle cx="40" cy="56" r="2.3" fill="#2b2b2b"/><circle cx="60" cy="56" r="2.3" fill="#2b2b2b"/><ellipse cx="32" cy="65" rx="4.5" ry="2.6" fill="#ffa8a8" opacity=".55"/><ellipse cx="68" cy="65" rx="4.5" ry="2.6" fill="#ffa8a8" opacity=".55"/><path d="M45 67 Q50 70 55 67" stroke="#c0392b" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M24 100 Q24 82 50 80 Q76 82 76 100Z" fill="#f3ead7"/><path d="M38 81 L50 92 L62 81" stroke="#d8ccb2" stroke-width="2" fill="none"/><circle cx="50" cy="95" r="1.8" fill="#bfb39a"/></svg>`
+};
+const avHTML = (k, cls='') => AV[k] ? `<span class="av ${cls}">${AV[k]}</span>` : '';
 const KIDS = ['민지','민국'];
 const KCOL = {민지:'#ff8fb8', 민국:'#66b7ff'};
-const KFACE = {민지:'👧', 민국:'👦'};
+const KFACE = {민지:avHTML('민지'), 민국:avHTML('민국')};
 const GNAME = {num:'숫자 풍선', eng:'영어 놀이', cnt:'몇 개일까?', heart:'마음 놀이', chain:'끝말잇기', firefly:'반디요정'};
 const MAXLV = {num:10, eng:6, cnt:6, heart:2, chain:3, firefly:3};
 
@@ -679,14 +742,14 @@ function startSession(mode, kid){
 }
 function openMenu(greet){
   hush(); S.rid++; S.busy=false; S.game=null;
-  $('#menuTitle').textContent = S.mode==='duo' ? '👧 민지 🤝 민국 👦 같이 놀이' : `${S.kid}의 놀이터`;
+  $('#menuTitle').innerHTML = S.mode==='duo' ? `${KFACE.민지} 민지 🤝 민국 ${KFACE.민국}<br><small class="menusub">같이 놀이</small>` : `${KFACE[S.kid]} ${S.kid}의 놀이터`;
   $('#menuSub').textContent = S.mode==='duo' ? '번갈아 가며 5번씩! 💖 마음 놀이는 둘이 힘을 합쳐요' : '';
   document.querySelectorAll('[data-lv]').forEach(s=>{ const g=s.dataset.lv; s.textContent = S.mode==='duo' ? `민지 Lv${P.민지.lv[g]} · 민국 Lv${P.민국.lv[g]}` : `레벨 ${P[S.kid].lv[g]}`; });
   updScore(); show('menu');
   if(greet) say(S.mode==='duo' ? '민지, 민국아 안녕! 오늘은 같이 놀아 볼까? 무슨 놀이 할까?' : `안녕 ${call(S.kid)}! 무슨 놀이 할까?`);
   else say('무슨 놀이 할까?');
 }
-$('#toHome').onclick=()=>{ hush(); updHome(); show('home'); };
+$('#toHome').onclick=()=>{ hush(); updHome(); show('home'); say('누가 놀까?'); };
 $('#toMenu').onclick=()=>openMenu(false);
 document.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>{
   audio(); sPop(); hush(); S.game=b.dataset.game; S.duo={turns:0,max:10,cheers:0}; S.chain=null;
@@ -703,7 +766,7 @@ async function round(first){
   const rid=++S.rid; S.busy=true; S.wrong=0;
   $('#stage').innerHTML=''; $('#prompt').innerHTML='';
   const kid=S.kid, lv=P[kid].lv[S.game];
-  $('#lvtag').textContent = `${KFACE[kid]} ${GNAME[S.game]} · 레벨 ${lv}`;
+  $('#lvtag').innerHTML = `${KFACE[kid]} ${GNAME[S.game]} · 레벨 ${lv}`;
   updScore();
   const r = GEN[S.game](lv, kid); r.rid=rid; S.cur=r;
   if(S.mode==='duo') $('#prompt').insertAdjacentHTML('afterbegin', `<span class="turn" style="--k:${KCOL[kid]}">${KFACE[kid]} ${nameI(kid)} 차례!</span><br>`);
@@ -1337,7 +1400,7 @@ const MC_R = MC_L + 1;              // 고양이 한 바퀴 길이
 const MC_HOUSES = [ {e:[4,5], v:1, at:[92,9]}, {e:[12,13], v:2, at:[92,91]}, {e:[22,23], v:3, at:[8,91]}, {e:[30,31], v:4, at:[8,9]} ];
 const MC_DIE = [ {n:1,cat:true}, {n:1,cat:true}, {n:2}, {n:3}, {n:4}, {n:5} ];
 const MC_PEOPLE = {
-  민지:{face:'👧', col:'#ff6b9d'}, 민국:{face:'👦', col:'#4dabf7'}, 엄마:{face:'👩', col:'#ff922b'}, 아빠:{face:'👨', col:'#37b24d'}, 컴퓨터:{face:'🤖', col:'#9775fa', bot:true}
+  민지:{face:KFACE.민지, col:'#ff6b9d'}, 민국:{face:KFACE.민국, col:'#4dabf7'}, 엄마:{face:'👩', col:'#ff922b'}, 아빠:{face:'👨', col:'#37b24d'}, 컴퓨터:{face:'🤖', col:'#9775fa', bot:true}
 };
 let M=null;
 const mcIsCat = p => p>0 && p<=MC_L && p%2===0;              // 짝수 칸 = 고양이 발자국 칸
@@ -1392,7 +1455,7 @@ function mcRender(){
   M.houses.forEach((h,hi)=>{ const [x,y]=mcHousePos(h); const e=mk('div','mchouse',`<b>🧀${h.v}</b><span>남은 치즈 ${h.left}</span><div class="mcmice"></div>`); e.dataset.hi=hi; e.style.left=x+'%'; e.style.top=y+'%'; b.appendChild(e); });
   // 생쥐들
   M.players.forEach((pl,pi)=>pl.mice.forEach((m,mi)=>{
-    const d=mk('div','mouse','🐭'); d.style.setProperty('--mc',pl.col); d.dataset.pi=pi; d.dataset.mi=mi; d.onclick=()=>mcTapMouse(pi,mi);
+    const d=mk('div','mouse'+(AV[pl.n]?' kidm':''), AV[pl.n]?avHTML(pl.n):'🐭'); d.style.setProperty('--mc',pl.col); d.dataset.pi=pi; d.dataset.mi=mi; d.onclick=()=>mcTapMouse(pi,mi);
     if(m.st==='home') $('#mcHomeMice').appendChild(d);
     else if(m.st==='track') b.querySelector(`.mcsp[data-p="${m.p}"]`).appendChild(d);
     else if(m.st==='house') b.querySelector(`.mchouse[data-hi="${m.hi}"] .mcmice`).appendChild(d);
@@ -1594,7 +1657,7 @@ function ccRender(){
   C.eggs.forEach((pic,i)=>{ const [x,y]=ccEggPos(i); const e=mk('div','ccegg',CC_PICS[pic][0]); e.dataset.i=i; e.style.left=x+'%'; e.style.top=y+'%'; b.appendChild(e); });
   const g=mk('div','ccyard'); b.appendChild(g);
   C.octs.forEach((pic,k)=>{ const o=mk('div','ccoct',`<div class="in"><div class="back">🐾</div><div class="front">${CC_PICS[pic][0]}</div></div>${C.easy && C.ghost[k]?`<span class="ghost">${CC_PICS[pic][0]}</span>`:''}`); o.dataset.k=k; o.onclick=()=>ccTap(k); g.appendChild(o); });
-  C.players.forEach((p,pi)=>{ const [x,y]=ccEggPos(p.pos); const h=mk('div','cchen'+(pi===C.turn?' now':''),`🐔<span class="tail">${p.feathers.map(f=>`<i style="background:${C.players[f].col}"></i>`).join('')}</span>`); h.id='cchen'+pi; h.style.setProperty('--k',p.col); h.style.left=x+'%'; h.style.top=y+'%'; b.appendChild(h); });
+  C.players.forEach((p,pi)=>{ const [x,y]=ccEggPos(p.pos); const h=mk('div','cchen'+(pi===C.turn?' now':''),`🐔${AV[p.n]?`<span class="hbadge">${avHTML(p.n)}</span>`:''}<span class="tail">${p.feathers.map(f=>`<i style="background:${C.players[f].col}"></i>`).join('')}</span>`); h.id='cchen'+pi; h.style.setProperty('--k',p.col); h.style.left=x+'%'; h.style.top=y+'%'; b.appendChild(h); });
   ccMark();
   $('#ccScore').innerHTML = C.players.map((p,i)=>`<span class="chip ${i===C.turn?'now':''}" style="--k:${p.col}">${p.face} ${p.n} 🪶${p.feathers.length}</span>`).join('');
 }
@@ -1762,6 +1825,22 @@ const _round=round;
 round = async function(first){ $('#prompt').style.top=''; $('#stage').style.top=''; return _round(first); };
 
 updHome(); updVoiceUI();
+// 첫 화면: 글자 통통 + 얼굴 + 이름 불러 주기
+(function(){
+  const t='민지 민국 놀이터', cols=['#ff5c8a','#ff8a3d','#f5b700','#40c070','#3d8bfd','#9b5de5'];
+  let ci=0, di=0; $('#bigTitle').innerHTML=t.split(' ').map(w=>`<span class="tw">${[...w].map(ch=>`<span style="animation-delay:${(di++)*0.09}s;color:${cols[(ci++)%cols.length]}">${ch}</span>`).join('')}</span>`).map((h,i)=>i===2?'<span class="brk"></span>'+h:h).join('<span class="sp"> </span>');
+  $('#tfMinji').innerHTML=avHTML('민지'); $('#tfMinguk').innerHTML=avHTML('민국');
+  document.querySelectorAll('[data-av]').forEach(e=>e.innerHTML=avHTML(e.dataset.av));
+  const sp=document.querySelector('.sparkles'); for(let i=0;i<22;i++){ const x=mk('i','',pick(['✨','⭐','🌈','🎈','💖'])); x.style.left=rnd(100)+'%'; x.style.top=rnd(100)+'%'; x.style.animationDelay=(Math.random()*3)+'s'; sp.appendChild(x); }
+  let going=false;
+  $('#title').addEventListener('click', async()=>{
+    if(going) return; going=true; audio(); sFan(); hush();
+    document.querySelectorAll('#title .tface').forEach(e=>e.classList.add('jump'));
+    await say('민지야! 민국아! 민지 민국 놀이터에 온 걸 환영해!');
+    updHome(); show('home'); going=false;
+    say('오늘은 누가 놀까? 얼굴을 눌러 줘!');
+  });
+})();
 
 // 아이폰 대응: 클릭이 안 들어오는 기기를 위해 손가락을 떼는 순간 직접 눌러 줌
 (function(){
