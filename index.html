@@ -191,6 +191,40 @@
     .mchouse{min-width:11%;padding:.3vh .6vh}
     .mchouse span{display:none}
   }
+
+  /* 치킨차차 */
+  .ccbtn{background:linear-gradient(135deg,#ff922b,#e8590c)}
+  #ccscreen{background:linear-gradient(180deg,#d3f9d8,#b2f2bb)}
+  #ccMsg{position:absolute;top:10vh;left:3vw;right:3vw;text-align:center;font-size:clamp(18px,2.6vw,46px)}
+  .ccpic{display:inline-block;background:#fff;border-radius:1vh;padding:0 .6vw}
+  #ccBoard{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);width:min(76vh,70vw);height:min(74vh,68vw)}
+  .ccegg{position:absolute;width:9.5%;height:12%;transform:translate(-50%,-50%);background:#fffdf0;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;display:flex;align-items:center;justify-content:center;font-size:min(4.4vh,3.6vw);box-shadow:0 .5vh 0 rgba(0,0,0,.12);border:.3vh solid #e9dfb8}
+  .ccegg.target{animation:glow .8s infinite alternate}
+  .ccyard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58%;height:52%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:2.4%}
+  .ccoct{position:relative;perspective:600px;cursor:pointer}
+  .ccoct .in{position:absolute;inset:0;transition:transform .45s;transform-style:preserve-3d}
+  .ccoct.open .in{transform:rotateY(180deg)}
+  .ccoct .back,.ccoct .front{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+  .ccoct .back{background:#8d6e3f;color:rgba(255,255,255,.35);font-size:min(4vh,3vw)}
+  .ccoct .front{background:#fff8dc;transform:rotateY(180deg);font-size:min(7vh,5.4vw)}
+  .ccoct .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(4vh,3vw);opacity:.28;pointer-events:none}
+  .ccoct.hover .back{background:#b08d57}
+  .ccoct:hover .back{background:#a57d47}
+  .cchen{position:absolute;transform:translate(-50%,-80%);font-size:min(7vh,5.6vw);transition:left .45s ease,top .45s ease;z-index:5;pointer-events:none;filter:drop-shadow(0 0 0 var(--k)) drop-shadow(0 .5vh .4vh rgba(0,0,0,.25))}
+  .cchen.now{filter:drop-shadow(0 0 1.2vh var(--k)) drop-shadow(0 0 .4vh var(--k))}
+  .cchen .tail{position:absolute;left:-10%;top:10%;display:flex;flex-direction:column;gap:.2vh}
+  .cchen .tail i{display:block;width:1.4vh;height:.9vh;border-radius:50% 0 50% 0;border:1px solid #fff}
+  #ccEndBox{position:absolute;right:3vw;top:45%;display:none;flex-direction:column;gap:2vh;z-index:8}
+  @media (orientation: portrait){
+    #ccMsg{top:9vh;font-size:4.4vw}
+    #ccBoard{width:96vw;height:94vw;top:55%}
+    .ccegg{font-size:5.4vw} .ccoct .front{font-size:8vw} .ccoct .back{font-size:4vw}
+    .cchen{font-size:8vw}
+    #ccscreen .topbar{align-items:flex-start}
+    #ccScore{flex-wrap:wrap;justify-content:flex-end;gap:1vw}
+    #ccScore .chip{font-size:3.4vw;padding:.3vh 2vw}
+    #ccEndBox{right:0;left:0;top:auto;bottom:3vh;flex-direction:row;justify-content:center}
+  }
   /* 마음 놀이 */
   .scene{font-size:clamp(70px,11vw,200px);line-height:1}
   .opts{display:flex;flex-direction:column;gap:1.8vh;width:min(80vw,1200px)}
@@ -328,7 +362,7 @@
     <button class="pill" id="voiceToggle">꺼짐</button>
   </div>
   <div class="note" id="voiceNote"></div>
-  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v8</div>
+  <div class="note" style="position:absolute;bottom:1vh;right:2vw;opacity:.4">v9</div>
 </section>
 
 <!-- 놀이 고르기 -->
@@ -343,6 +377,7 @@
     <button class="big blue card" data-game="chain"><span class="em">🔗</span>끝말잇기<small data-lv="chain"></small></button>
     <button class="big ffbtn card" data-game="firefly"><span class="em">🧚</span>반디요정<small data-lv="firefly"></small></button>
     <button class="big mcbtn card" data-game="mouse"><span class="em">🐭</span>생쥐만세<small>2~4명 같이</small></button>
+    <button class="big ccbtn card" data-game="chicken"><span class="em">🐔</span>치킨차차<small>2~4명 같이</small></button>
   </div>
   <div class="sub" id="menuSub"></div>
 </section>
@@ -400,6 +435,28 @@
       <div id="mcEndBox"><div id="mcRank"></div><button class="big green small" id="mcAgain">🔁 한 판 더</button><button class="big blue small" id="mcMenuB">🎲 다른 놀이</button></div>
     </div>
   </div>
+</section>
+
+<!-- 치킨차차: 누가 할까 -->
+<section id="ccsetup" class="screen">
+  <h2>🐔 치킨차차 🪶</h2>
+  <div class="sub">누구누구 같이 할까요? (2~4명)</div>
+  <div class="pills" id="ccWho" style="font-size:clamp(20px,2.6vw,44px)"></div>
+  <div class="pills"><button class="pill" id="ccEasy">👀 쉬운 모드 (한 번 뒤집은 그림이 흐릿하게 보여요)</button></div>
+  <div class="lesson" style="max-width:86vw;text-align:left">
+    🥚 내 닭 바로 앞 달걀 그림과 <b>같은 그림</b>의 팔각 타일을 뒤집으면 한 칸 앞으로! 맞히면 계속, 틀리면 다음 사람<br>
+    🐔 앞에 다른 닭이 있으면 그 닭 <b>앞 달걀 그림</b>을 찾아야 뛰어넘어요 → 그 닭의 🪶꼬리깃털을 모두 가져와요<br>
+    🏆 꼬리깃털을 <b>모두</b> 모은 닭이 이겨요 · 뒤집은 타일은 제자리에 다시 덮어요 (어디 있었는지 기억!)
+  </div>
+  <div class="row"><button class="big green small" id="ccGo">▶ 시작!</button><button class="big blue small" id="ccBack">🎲 다른 놀이</button></div>
+</section>
+
+<!-- 치킨차차 게임 -->
+<section id="ccscreen" class="screen">
+  <div class="topbar"><button class="icon" id="ccHomeBtn" title="놀이 고르기">🏠</button><div class="score" id="ccScore"></div></div>
+  <div id="ccMsg"></div>
+  <div id="ccBoard"></div>
+  <div id="ccEndBox"><button class="big green small" id="ccAgain">🔁 한 판 더</button><button class="big blue small" id="ccMenuB">🎲 다른 놀이</button></div>
 </section>
 
 <!-- 같이 하기 결과 -->
@@ -635,6 +692,7 @@ document.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>{
   audio(); sPop(); hush(); S.game=b.dataset.game; S.duo={turns:0,max:10,cheers:0}; S.chain=null;
   if(S.game==='firefly') return startFirefly();
   if(S.game==='mouse') return mcSetupScreen();
+  if(S.game==='chicken') return ccSetupScreen();
   show('game'); $('#cheerTip').style.display = 'none'; $('#cheerBtn').style.display = S.mode==='duo' ? 'block' : 'none'; if(S.mode==='duo') showCheerTip();
   round(true);
 });
@@ -1493,6 +1551,119 @@ async function mcEnd(rid){
   $('#mcHomeBtn').onclick=()=>openMenu(false);
   $('#mcAgain').onclick=()=>{ $('#mcEndBox').style.display='none'; mcSetupScreen(); };
   $('#mcMenuB').onclick=()=>openMenu(false);
+})();
+
+
+// ================= 8. 치킨차차 (Zicke Zacke Hühnerkacke 규칙) =================
+// 공식 규칙: 달걀 타일 24개(12그림×2)가 둥글게, 가운데 팔각 타일 12개는 뒤집어 둠
+// 내 닭 바로 앞 달걀 그림과 같은 팔각 타일을 뒤집으면 한 칸 전진하고 계속, 틀리면 차례 끝(타일은 제자리에 다시 덮음)
+// 앞에 다른 닭이 있으면 그 닭 앞 달걀 그림을 찾아야 뛰어넘고, 뛰어넘으면 그 닭의 꼬리깃털을 모두 가져옴
+// 모든 꼬리깃털을 모은 닭이 승리
+const CC_PICS = [['🐌','달팽이'],['🐛','애벌레'],['🌻','해바라기'],['🥚','달걀'],['🐰','토끼'],['🦔','고슴도치'],['🐸','개구리'],['🌽','옥수수'],['🪱','지렁이'],['🐭','생쥐'],['🐱','고양이'],['🦊','여우']];
+let C=null;
+function ccSetupScreen(){
+  hush(); S.rid++; S.game='chicken';
+  const sel = S.mode==='duo' ? ['민지','민국'] : [S.kid,'컴퓨터'];
+  const box=$('#ccWho'); box.innerHTML='';
+  Object.keys(MC_PEOPLE).forEach(n=>{ const b=mk('button','pill'+(sel.includes(n)?' sel':''), `${MC_PEOPLE[n].face} ${n}`); b.dataset.n=n;
+    b.onclick=()=>{ b.classList.toggle('sel'); if(document.querySelectorAll('#ccWho .sel').length>4){ b.classList.remove('sel'); say('네 명까지 할 수 있어요'); } }; box.appendChild(b); });
+  $('#ccEasy').classList.toggle('sel', S.mode==='duo' || S.kid==='민국');
+  show('ccsetup');
+  say('치킨차차! 누구누구 같이 할까요?');
+}
+function ccStart(){
+  const names=[...document.querySelectorAll('#ccWho .sel')].map(b=>b.dataset.n);
+  if(names.length<2){ say('두 명 이상 골라 주세요!'); return; }
+  audio();
+  const eggs=shuffle([...Array(12).keys(), ...Array(12).keys()]);
+  const n=names.length, gap=24/n, off=rnd(24);
+  C={ eggs, octs: shuffle([...Array(12).keys()]), easy: $('#ccEasy').classList.contains('sel'),
+      players: names.map((nm,i)=>({n:nm, face:MC_PEOPLE[nm].face, col:MC_PEOPLE[nm].col, bot:!!MC_PEOPLE[nm].bot, pos:(off+Math.round(i*gap))%24, feathers:[i]})),
+      turn:0, phase:'pick', seen:{}, ghost:{} };
+  C.turn=rnd(n);
+  show('ccscreen'); ccRender(); ccTurn(++S.rid, true);
+}
+const ccP = () => C.players[C.turn];
+const ccName = p => p.bot ? '컴퓨터' : ((p.n==='엄마'||p.n==='아빠') ? p.n : nameI(p.n));
+function ccEggPos(i){ const a=(-90 + i*15)*Math.PI/180; return [50+45*Math.cos(a), 50+43*Math.sin(a)]; }
+function ccWho(pos){ return C.players.findIndex(p=>p.pos===pos); }
+// 지금 찾아야 할 달걀: 바로 앞 달걀, 앞에 닭들이 줄지어 있으면 그 줄 다음 달걀
+function ccTarget(pi){ let t=(C.players[pi].pos+1)%24, jumped=[]; while(ccWho(t)>=0 && ccWho(t)!==pi){ jumped.push(ccWho(t)); t=(t+1)%24; } return {t, jumped}; }
+function ccRender(){
+  const b=$('#ccBoard'); b.innerHTML='';
+  C.eggs.forEach((pic,i)=>{ const [x,y]=ccEggPos(i); const e=mk('div','ccegg',CC_PICS[pic][0]); e.dataset.i=i; e.style.left=x+'%'; e.style.top=y+'%'; b.appendChild(e); });
+  const g=mk('div','ccyard'); b.appendChild(g);
+  C.octs.forEach((pic,k)=>{ const o=mk('div','ccoct',`<div class="in"><div class="back">🐾</div><div class="front">${CC_PICS[pic][0]}</div></div>${C.easy && C.ghost[k]?`<span class="ghost">${CC_PICS[pic][0]}</span>`:''}`); o.dataset.k=k; o.onclick=()=>ccTap(k); g.appendChild(o); });
+  C.players.forEach((p,pi)=>{ const [x,y]=ccEggPos(p.pos); const h=mk('div','cchen'+(pi===C.turn?' now':''),`🐔<span class="tail">${p.feathers.map(f=>`<i style="background:${C.players[f].col}"></i>`).join('')}</span>`); h.id='cchen'+pi; h.style.setProperty('--k',p.col); h.style.left=x+'%'; h.style.top=y+'%'; b.appendChild(h); });
+  ccMark();
+  $('#ccScore').innerHTML = C.players.map((p,i)=>`<span class="chip ${i===C.turn?'now':''}" style="--k:${p.col}">${p.face} ${p.n} 🪶${p.feathers.length}</span>`).join('');
+}
+function ccMark(){ document.querySelectorAll('#ccBoard .ccegg').forEach(e=>e.classList.remove('target')); const {t}=ccTarget(C.turn); const e=document.querySelector(`#ccBoard .ccegg[data-i="${t}"]`); if(e) e.classList.add('target'); }
+function ccHenMove(pi){ const p=C.players[pi], [x,y]=ccEggPos(p.pos), h=$('#cchen'+pi); if(h){ h.style.left=x+'%'; h.style.top=y+'%'; } }
+const ccMsg = t => $('#ccMsg').innerHTML=t;
+async function ccTurn(rid, first){
+  const alive=()=>rid===S.rid; if(!alive()) return;
+  C.phase='pick'; ccRender();
+  const p=ccP(), {t, jumped}=ccTarget(C.turn), pic=CC_PICS[C.eggs[t]];
+  ccMsg(`${p.face} <b>${ccName(p)} 차례!</b> 반짝이는 달걀 <span class="ccpic">${pic[0]}</span> <b>${pic[1]}</b>를 찾아 팔각 타일을 뒤집어요${jumped.length?` — 찾으면 앞 닭을 뛰어넘어 🪶깃털을 가져와요!`:''}`);
+  if(first){ await say('치킨차차! 내 닭 앞에 있는 달걀 그림과 같은 그림을 찾으면 앞으로 가요. 다른 닭을 뛰어넘으면 꼬리깃털을 가져와요!'); if(!alive()) return; }
+  if(p.bot){ await say(`컴퓨터 차례! ${pic[1]}를 찾아야 해.`); if(!alive()) return; await wait(500); return ccBotPick(rid); }
+  await say(`${ccName(p)} 차례! ${jumped.length ? `${jumped.map(i=>ccName(C.players[i])).join(', ')} 닭을 뛰어넘으려면 ${pic[1]}${hasBatchim(pic[1])?'을':'를'} 찾아!` : `${pic[1]}${hasBatchim(pic[1])?'을':'를'} 찾아!`}`);
+}
+function ccTap(k){ if(!C || C.phase!=='pick' || ccP().bot) return; audio(); ccFlip(k, S.rid); }
+async function ccFlip(k, rid){
+  const alive=()=>rid===S.rid; if(C.phase!=='pick') return; C.phase='flip';
+  const o=document.querySelector(`#ccBoard .ccoct[data-k="${k}"]`); o.classList.add('open'); tone(500,800,.12,'triangle',.15);
+  C.seen[k]=C.octs[k]; C.ghost[k]=true;
+  const pi=C.turn, p=ccP(), {t, jumped}=ccTarget(pi), want=C.eggs[t], got=C.octs[k];
+  await wait(800); if(!alive()) return;
+  if(got===want){
+    sDing();
+    p.pos=t; ccHenMove(pi); tone(700,1100,.15,'triangle',.2);
+    if(jumped.length){
+      const names=[]; jumped.forEach(j=>{ const q=C.players[j]; if(q.feathers.length){ names.push(ccName(q)); p.feathers.push(...q.feathers); q.feathers=[]; } });
+      await wait(400); if(!alive()) return; ccRender(); sFan(); floatUp('🪶');
+      await say(names.length ? `뛰어넘었다! ${names.join(', ')} 닭의 꼬리깃털을 가져왔어!` : '뛰어넘었다!'); if(!alive()) return;
+      const total=C.players.length;
+      if(p.feathers.length>=total) return ccEnd(rid, pi);
+    } else { await say(pick([`${CC_PICS[got][1]}! 맞았어! 한 칸 앞으로!`,`딩동댕! ${CC_PICS[got][1]}! 계속 가!`])); if(!alive()) return; }
+    o.classList.remove('open'); await wait(450); if(!alive()) return;
+    C.phase='pick'; ccRender();
+    const nt=ccTarget(pi), np=CC_PICS[C.eggs[nt.t]];
+    ccMsg(`${p.face} <b>계속!</b> 이번엔 <span class="ccpic">${np[0]}</span> <b>${np[1]}</b>를 찾아요${nt.jumped.length?' — 찾으면 뛰어넘어요!':''}`);
+    if(p.bot){ await wait(400); return ccBotPick(rid); }
+    await say(`이번엔 ${np[1]}${hasBatchim(np[1])?'을':'를'} 찾아!`); return;
+  }
+  sBoop();
+  await say(`${CC_PICS[got][1]}! 아쉽다. ${p.bot?'':'어디 있었는지 잘 기억해 둬!'}`); if(!alive()) return;
+  await wait(600); o.classList.remove('open'); await wait(400); if(!alive()) return;
+  C.turn=(C.turn+1)%C.players.length; ccTurn(rid);
+}
+async function ccBotPick(rid){
+  const {t}=ccTarget(C.turn), want=C.eggs[t];
+  const known=Object.keys(C.seen).filter(k=>C.seen[k]===want && Math.random()<0.65);
+  const wrongKnown=Object.keys(C.seen).filter(k=>C.seen[k]!==want);
+  let k = known.length ? +known[0] : null;
+  if(k===null){ const pool=[...Array(12).keys()].filter(x=>!wrongKnown.includes(String(x)) || Math.random()<0.3); k=pick(pool.length?pool:[...Array(12).keys()]); }
+  const o=document.querySelector(`#ccBoard .ccoct[data-k="${k}"]`); if(o) o.classList.add('hover');
+  await wait(600); if(rid===S.rid) ccFlip(k, rid);
+}
+async function ccEnd(rid, wi){
+  const alive=()=>rid===S.rid; C.phase='end'; ccRender();
+  const w=C.players[wi];
+  C.players.forEach((p,i)=>{ if(P[p.n]){ P[p.n].stars += (i===wi?5:2); } }); save();
+  ccMsg(`🏆 ${w.face} <b>${w.n}</b> 승리! 꼬리깃털을 모두 모았어요!`);
+  $('#ccEndBox').style.display='flex';
+  await overlay(`🏆 ${w.face} ${w.n} 승리!<br>🪶 깃털 ${w.feathers.length}개 모두!`, `${w.bot?'컴퓨터':j(ccName(w),'이','가')} 꼬리깃털을 모두 모았어! 승리!`); if(!alive()) return;
+  for(const p of C.players){ if(p===w || p.bot) continue; await say(`${(p.n==='엄마'||p.n==='아빠')?p.n:call(p.n)}, 정말 잘 기억했어! 다음엔 네 닭이 깃털을 모을 수도 있어!`); if(!alive()) return; }
+  await say('이긴 사람은 다들 잘했어! 하고, 다른 사람은 축하해! 하고 말해 줄까? 다 같이 꼬꼬댁 하이파이브! 짝!'); sClap(); setTimeout(sClap,120);
+}
+
+(function(){
+  $('#ccGo').onclick=ccStart; $('#ccBack').onclick=()=>openMenu(false); $('#ccHomeBtn').onclick=()=>openMenu(false);
+  $('#ccEasy').onclick=()=>$('#ccEasy').classList.toggle('sel');
+  $('#ccAgain').onclick=()=>{ $('#ccEndBox').style.display='none'; ccSetupScreen(); };
+  $('#ccMenuB').onclick=()=>openMenu(false);
 })();
 
 // ================= 같이 하기 결과 =================
